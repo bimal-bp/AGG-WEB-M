@@ -3,369 +3,472 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mine Operation Book - AG Anakapalli</title>
+    <title>Mines & Maintenance Daily Report</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        .nav-tab { @apply px-6 py-3 text-sm font-medium cursor-pointer border-b-2 transition-all; }
-        .nav-tab-active { @apply border-blue-600 text-blue-600 bg-white; }
-        .section { @apply hidden; }
-        .section-active { @apply block; }
+        .section-header { background: linear-gradient(to right, #1e40af, #3b82f6); }
+        table { border-collapse: collapse; }
+        th, td { border: 1px solid #d1d5db; }
+        .nav-tab {
+            transition: all 0.3s;
+        }
+        .nav-tab.active {
+            background-color: #1e40af;
+            color: white;
+            border-bottom: 4px solid #60a5fa;
+        }
     </style>
 </head>
-<body class="bg-gray-100">
-
-<div class="max-w-7xl mx-auto bg-white shadow-xl min-h-screen">
-
-    <!-- Header -->
-    <div class="bg-gradient-to-r from-blue-700 to-blue-600 text-white p-6">
-        <h1 class="text-2xl font-bold">Mine Operation Book</h1>
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mt-6">
-            <div>
-                <label class="text-xs opacity-75">Location</label>
-                <div class="bg-white/20 rounded-lg px-4 py-2">AG - Anakapalli</div>
-            </div>
-            <div>
-                <label class="text-xs opacity-75">Shift</label>
-                <div class="bg-white/20 rounded-lg px-4 py-2">Day Shift [08:00 AM To 08:00 PM]</div>
-            </div>
-            <div>
-                <label class="text-xs opacity-75">Date</label>
-                <div class="bg-white/20 rounded-lg px-4 py-2">12/05/2026</div>
-            </div>
-            <div>
-                <label class="text-xs opacity-75">Shift Type</label>
-                <div class="bg-white/20 rounded-lg px-4 py-2">Working</div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Navigation Tabs -->
-    <div class="flex border-b bg-white sticky top-0 z-10">
-        <div onclick="switchTab(0)" class="nav-tab nav-tab-active" id="tab0">Quarry Details</div>
-        <div onclick="switchTab(1)" class="nav-tab" id="tab1">Resource</div>
-        <div onclick="switchTab(2)" class="nav-tab" id="tab2">Maintenance</div>
-        <div onclick="switchTab(3)" class="nav-tab" id="tab3">Boulder Transfer</div>
-        <div onclick="switchTab(4)" class="nav-tab" id="tab4">Stock</div>
-    </div>
-
-    <div class="p-8">
-
-        <!-- ====================== 1. QUARRY DETAILS ====================== -->
-        <div id="section0" class="section section-active">
-            <h2 class="text-xl font-semibold mb-6 flex items-center gap-2"><i class="fas fa-bomb text-blue-600"></i> Quarry Details</h2>
+<body class="bg-gray-100 font-sans">
+    <div class="max-w-7xl mx-auto p-6">
+        <div class="bg-white rounded-2xl shadow-2xl overflow-hidden">
             
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-                <div>
-                    <label class="block text-sm font-medium">No. of Holes</label>
-                    <input type="number" class="w-full border rounded-lg p-3" value="45">
-                </div>
-                <div>
-                    <label class="block text-sm font-medium">Depth (ft)</label>
-                    <input type="number" class="w-full border rounded-lg p-3" value="1200">
-                </div>
-                <div>
-                    <label class="block text-sm font-medium">Total Feet</label>
-                    <input type="number" class="w-full border rounded-lg p-3" value="54000">
-                </div>
-                <div>
-                    <label class="block text-sm font-medium">No. of Tippers</label>
-                    <input type="number" class="w-full border rounded-lg p-3" value="8">
-                </div>
-            </div>
-
-            <div class="mt-8">
-                <h3 class="font-semibold mb-3">Work Details</h3>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Header -->
+            <div class="section-header text-white p-8">
+                <h1 class="text-3xl font-bold flex items-center gap-3">
+                    <i class="fas fa-mountain"></i>
+                    Mines &amp; Maintenance Daily Report
+                </h1>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-6 text-sm">
                     <div>
-                        <label>Start Time</label>
-                        <input type="time" class="w-full border rounded-lg p-3" value="08:00">
+                        <p class="opacity-75">Activity Date</p>
+                        <p class="font-semibold">12/05/2026</p>
                     </div>
                     <div>
-                        <label>End Time</label>
-                        <input type="time" class="w-full border rounded-lg p-3" value="20:00">
+                        <p class="opacity-75">Location Name</p>
+                        <p class="font-semibold">AG - Anakapalli</p>
                     </div>
                     <div>
-                        <label>Total Work Hrs</label>
-                        <input type="text" class="w-full border rounded-lg p-3 bg-gray-50" value="12:00" readonly>
+                        <p class="opacity-75">Shift Name</p>
+                        <p class="font-semibold">Day Shift</p>
+                    </div>
+                    <div>
+                        <p class="opacity-75">Shift Time</p>
+                        <p class="font-semibold">08:00 AM - 08:00 PM</p>
                     </div>
                 </div>
-                <div class="mt-4">
-                    <label>Work Area / Location</label>
-                    <input type="text" class="w-full border rounded-lg p-3" placeholder="Quarry Face - North">
+            </div>
+
+            <!-- Navigation Tabs -->
+            <div class="bg-white border-b px-8 pt-4 flex flex-wrap gap-2">
+                <button onclick="showSection(0)" class="nav-tab active px-6 py-3 rounded-t-xl font-semibold flex items-center gap-2" id="tab-0">
+                    <i class="fas fa-info-circle"></i> Quarry Details
+                </button>
+                <button onclick="showSection(1)" class="nav-tab px-6 py-3 rounded-t-xl font-semibold flex items-center gap-2" id="tab-1">
+                    <i class="fas fa-tools"></i> Resource
+                </button>
+                <button onclick="showSection(2)" class="nav-tab px-6 py-3 rounded-t-xl font-semibold flex items-center gap-2" id="tab-2">
+                    <i class="fas fa-wrench"></i> Maintenance
+                </button>
+                <button onclick="showSection(3)" class="nav-tab px-6 py-3 rounded-t-xl font-semibold flex items-center gap-2" id="tab-3">
+                    <i class="fas fa-truck"></i> Boulder Transfer
+                </button>
+                <button onclick="showSection(4)" class="nav-tab px-6 py-3 rounded-t-xl font-semibold flex items-center gap-2" id="tab-4">
+                    <i class="fas fa-boxes"></i> Stock
+                </button>
+            </div>
+
+            <div class="p-8 space-y-12">
+
+                <!-- ==================== SECTION 1: QUARRY DETAILS ==================== -->
+                <div id="section-0" class="section-content">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-6 flex items-center gap-2">
+                        <i class="fas fa-bomb"></i> QUARRY / INPUT DETAILS
+                    </h2>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                        <div class="bg-gray-50 p-4 rounded-xl">
+                            <label class="block text-sm font-medium text-gray-600">No. of Compressor</label>
+                            <input type="number" class="w-full mt-1 border rounded-lg p-2" value="2">
+                        </div>
+                        <div class="bg-gray-50 p-4 rounded-xl">
+                            <label class="block text-sm font-medium text-gray-600">No. of Holes</label>
+                            <input type="number" class="w-full mt-1 border rounded-lg p-2" value="45">
+                        </div>
+                        <div class="bg-gray-50 p-4 rounded-xl">
+                            <label class="block text-sm font-medium text-gray-600">Depth (ft)</label>
+                            <input type="number" class="w-full mt-1 border rounded-lg p-2" value="1200">
+                        </div>
+                        <div class="bg-gray-50 p-4 rounded-xl">
+                            <label class="block text-sm font-medium text-gray-600">Total Feet</label>
+                            <input type="number" class="w-full mt-1 border rounded-lg p-2" value="54000">
+                        </div>
+                    </div>
+
+                    <div class="border rounded-2xl p-6 bg-gray-50 mb-8">
+                        <h3 class="font-semibold text-lg mb-4">Work Details</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div>
+                                <label class="block text-sm font-medium">Start Time</label>
+                                <input type="time" class="w-full border rounded-lg p-3" value="08:00">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium">End Time</label>
+                                <input type="time" class="w-full border rounded-lg p-3" value="20:00">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium">Total Work Hours</label>
+                                <input type="text" class="w-full border rounded-lg p-3 bg-white" value="12:00" readonly>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <label class="block text-sm font-medium">Work Location / Area</label>
+                            <input type="text" class="w-full border rounded-lg p-3" placeholder="e.g. Quarry Face - North Side">
+                        </div>
+                    </div>
+
+                    <!-- Boulder Output -->
+                    <div class="mb-8">
+                        <h3 class="font-semibold text-lg mb-3">Boulder Output</h3>
+                        <table class="w-full text-sm">
+                            <thead class="bg-gray-100">
+                                <tr>
+                                    <th class="p-3 text-left">Sr. No.</th>
+                                    <th class="p-3 text-left">Size</th>
+                                    <th class="p-3 text-left">Qty (MT)</th>
+                                    <th class="p-3 text-left">Recovery (%)</th>
+                                    <th class="p-3">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="boulder-tbody">
+                                <!-- JS added -->
+                            </tbody>
+                        </table>
+                        <button onclick="addBoulderRow()" class="mt-3 px-4 py-2 bg-blue-600 text-white rounded-lg text-sm">+ Add Row</button>
+                    </div>
+                </div>
+
+                <!-- ==================== SECTION 2: RESOURCE ==================== -->
+                <div id="section-1" class="section-content hidden">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-6 flex items-center gap-2">
+                        <i class="fas fa-cogs"></i> RESOURCE DETAILS
+                    </h2>
+
+                    <!-- Compressor Details -->
+                    <div class="mb-10">
+                        <h3 class="font-semibold text-lg mb-3">Compressor Details</h3>
+                        <table class="w-full text-sm">
+                            <thead class="bg-gray-100">
+                                <tr>
+                                    <th class="p-3">Sr. No.</th>
+                                    <th class="p-3">Vendor Name</th>
+                                    <th class="p-3">Working</th>
+                                    <th class="p-3">Output</th>
+                                    <th class="p-3">Purpose</th>
+                                    <th class="p-3">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="compressor-tbody"></tbody>
+                        </table>
+                        <button onclick="addCompressorRow()" class="mt-3 px-4 py-2 bg-blue-600 text-white rounded-lg text-sm">+ Add Compressor</button>
+                    </div>
+
+                    <!-- Equipment Details -->
+                    <div class="mb-10">
+                        <h3 class="font-semibold text-lg mb-3">Equipment Details</h3>
+                        <table class="w-full text-sm">
+                            <thead class="bg-gray-100">
+                                <tr>
+                                    <th class="p-3">Sr. No.</th>
+                                    <th class="p-3">Equipment</th>
+                                    <th class="p-3">Purpose</th>
+                                    <th class="p-3">Used For</th>
+                                    <th class="p-3">From</th>
+                                    <th class="p-3">To</th>
+                                    <th class="p-3">Idle</th>
+                                    <th class="p-3">Breakdown</th>
+                                    <th class="p-3">Total Fuel</th>
+                                    <th class="p-3">Start HMR</th>
+                                    <th class="p-3">End HMR</th>
+                                </tr>
+                            </thead>
+                            <tbody id="equipment-tbody"></tbody>
+                        </table>
+                        <button onclick="addEquipmentRow()" class="mt-3 px-4 py-2 bg-blue-600 text-white rounded-lg text-sm">+ Add Equipment</button>
+                    </div>
+
+                    <!-- Blasting Material Details -->
+                    <div class="mb-10">
+                        <h3 class="font-semibold text-lg mb-3">Blasting Material Details</h3>
+                        <table class="w-full text-sm">
+                            <thead class="bg-gray-100">
+                                <tr>
+                                    <th class="p-3">Sr. No.</th>
+                                    <th class="p-3">Material</th>
+                                    <th class="p-3">Opening Qty</th>
+                                    <th class="p-3">Used Qty</th>
+                                    <th class="p-3">Balance Qty</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Static rows as in original -->
+                                <tr><td class="p-3">1</td><td class="p-3">Blaster</td><td class="p-3">100.00</td><td class="p-3"><input type="number" value="0" class="w-24 border rounded p-1"></td><td class="p-3">100.00</td></tr>
+                                <tr><td class="p-3">2</td><td class="p-3">D Guards</td><td class="p-3">3830.00</td><td class="p-3"><input type="number" value="0" class="w-24 border rounded p-1"></td><td class="p-3">3830.00</td></tr>
+                                <!-- Add more as needed -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- ==================== SECTION 3: MAINTENANCE ==================== -->
+                <div id="section-2" class="section-content hidden">
+                    <h2 class="text-2xl font-bold text-amber-700 mb-6 flex items-center gap-2">
+                        <i class="fas fa-tools"></i> MAINTENANCE DETAILS
+                    </h2>
+                    <div class="mb-8">
+                        <h3 class="font-semibold text-lg mb-3">Maintenance Details</h3>
+                        <table class="w-full text-sm">
+                            <thead class="bg-amber-50">
+                                <tr>
+                                    <th class="p-3">Sr. No.</th>
+                                    <th class="p-3">Asset Type</th>
+                                    <th class="p-3">Asset Name</th>
+                                    <th class="p-3">From Hrs</th>
+                                    <th class="p-3">To Hrs</th>
+                                    <th class="p-3">Total Hrs</th>
+                                </tr>
+                            </thead>
+                            <tbody id="maint-tbody"></tbody>
+                        </table>
+                        <button onclick="addMaintenanceRow()" class="mt-3 px-4 py-2 bg-amber-600 text-white rounded-lg text-sm">+ Add Maintenance</button>
+                    </div>
+
+                    <div class="mb-8">
+                        <h3 class="font-semibold text-lg mb-3">Tipper Details</h3>
+                        <table class="w-full text-sm">
+                            <thead class="bg-amber-50">
+                                <tr>
+                                    <th class="p-3">Sr. No.</th>
+                                    <th class="p-3">Tipper Name</th>
+                                    <th class="p-3">Breakdown Status</th>
+                                    <th class="p-3">Start KMR</th>
+                                    <th class="p-3">End KMR</th>
+                                    <th class="p-3">Exp. Ready Date</th>
+                                    <th class="p-3">Exp. Ready Time</th>
+                                    <th class="p-3">Maint. Incharge</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tipper-tbody"></tbody>
+                        </table>
+                        <button onclick="addTipperRow()" class="mt-3 px-4 py-2 bg-amber-600 text-white rounded-lg text-sm">+ Add Tipper</button>
+                    </div>
+                </div>
+
+                <!-- ==================== SECTION 4: BOULDER TRANSFER ==================== -->
+                <div id="section-3" class="section-content hidden">
+                    <h2 class="text-2xl font-bold text-amber-700 mb-6 flex items-center gap-2">
+                        <i class="fas fa-truck"></i> BOULDER TRANSFER DETAILS
+                    </h2>
+                    <table class="w-full text-sm">
+                        <thead class="bg-amber-50">
+                            <tr>
+                                <th class="p-3">Sr. No.</th>
+                                <th class="p-3">Tipper Name</th>
+                                <th class="p-3">No. of Trips</th>
+                                <th class="p-3">Qty (MT)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="transfer-tbody"></tbody>
+                    </table>
+                    <button onclick="addTransferRow()" class="mt-3 px-4 py-2 bg-amber-600 text-white rounded-lg text-sm">+ Add Transfer</button>
+                </div>
+
+                <!-- ==================== SECTION 5: STOCK ==================== -->
+                <div id="section-4" class="section-content hidden">
+                    <h2 class="text-2xl font-bold text-amber-700 mb-6 flex items-center gap-2">
+                        <i class="fas fa-boxes"></i> STOCK DETAILS
+                    </h2>
+                    <table class="w-full text-sm">
+                        <thead class="bg-gray-100">
+                            <tr>
+                                <th class="p-3">Sr. No.</th>
+                                <th class="p-3">Boulder Size</th>
+                                <th class="p-3">Opening</th>
+                                <th class="p-3">Production</th>
+                                <th class="p-3">Dispatch</th>
+                                <th class="p-3">Closing</th>
+                                <th class="p-3">Closing As Per Surveyor / Physical Gap</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="p-3">1</td>
+                                <td class="p-3">&gt;300 MM</td>
+                                <td class="p-3">0.00</td>
+                                <td class="p-3">0.00</td>
+                                <td class="p-3">0.00</td>
+                                <td class="p-3">0.00</td>
+                                <td class="p-3"><input type="number" class="w-28 border p-1 rounded"></td>
+                            </tr>
+                            <tr>
+                                <td class="p-3">2</td>
+                                <td class="p-3">20 - 550 MM</td>
+                                <td class="p-3">105888.69</td>
+                                <td class="p-3">105888.69</td>
+                                <td class="p-3">0.00</td>
+                                <td class="p-3">0.00</td>
+                                <td class="p-3"><input type="number" class="w-28 border p-1 rounded"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Common Footer Fields -->
+                <div class="pt-8 border-t">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium mb-1">Upload Before Operation Photo</label>
+                            <input type="file" class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-1">Upload After Operation Photo</label>
+                            <input type="file" class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-1">Upload Planning Copy</label>
+                            <input type="file" class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700">
+                        </div>
+                    </div>
+                    <div class="mt-6">
+                        <label class="block text-sm font-medium mb-2">Activity Remarks</label>
+                        <textarea class="w-full border rounded-xl p-4 h-24" placeholder="Any remarks..."></textarea>
+                    </div>
                 </div>
             </div>
 
-            <!-- Blasting Material Details -->
-            <div class="mt-10">
-                <h3 class="font-semibold mb-3">Blasting Material Details</h3>
-                <table class="w-full border text-sm">
-                    <thead class="bg-gray-100">
-                        <tr>
-                            <th class="p-3 text-left">Sr.</th>
-                            <th class="p-3 text-left">Material</th>
-                            <th class="p-3">Opening Qty</th>
-                            <th class="p-3">Used Qty</th>
-                            <th class="p-3">Balance Qty</th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y">
-                        <tr><td class="p-3">1</td><td class="p-3">Blaster</td><td class="p-3 text-center">100.00</td><td class="p-3"><input type="number" value="0" class="w-20 border rounded p-1"></td><td class="p-3 text-center">100.00</td></tr>
-                        <tr><td class="p-3">2</td><td class="p-3">D Guards</td><td class="p-3 text-center">3830.00</td><td class="p-3"><input type="number" value="0" class="w-20 border rounded p-1"></td><td class="p-3 text-center">3830.00</td></tr>
-                        <tr><td class="p-3">3</td><td class="p-3">Elect Detonators</td><td class="p-3 text-center">30.00</td><td class="p-3"><input type="number" value="0" class="w-20 border rounded p-1"></td><td class="p-3 text-center">30.00</td></tr>
-                        <tr><td class="p-3">4</td><td class="p-3">Nitrate</td><td class="p-3 text-center">100.00</td><td class="p-3"><input type="number" value="0" class="w-20 border rounded p-1"></td><td class="p-3 text-center">100.00</td></tr>
-                        <tr><td class="p-3">5</td><td class="p-3">Non Elect Detonators</td><td class="p-3 text-center">100.00</td><td class="p-3"><input type="number" value="0" class="w-20 border rounded p-1"></td><td class="p-3 text-center">100.00</td></tr>
-                    </tbody>
-                </table>
+            <!-- Footer Buttons -->
+            <div class="bg-gray-50 border-t p-8 flex justify-between items-center">
+                <button onclick="alert('Draft Saved!')" class="px-8 py-3 border border-gray-400 rounded-xl font-medium hover:bg-gray-100">
+                    Save as Draft
+                </button>
+                <button onclick="submitForm()" class="px-10 py-3 bg-green-600 text-white rounded-xl font-semibold hover:bg-green-700 flex items-center gap-2">
+                    <i class="fas fa-check"></i>
+                    Submit Final Report
+                </button>
             </div>
-        </div>
-
-        <!-- ====================== 2. RESOURCE ====================== -->
-        <div id="section1" class="section">
-            <h2 class="text-xl font-semibold mb-6 flex items-center gap-2"><i class="fas fa-cogs text-blue-600"></i> Resource</h2>
-            
-            <!-- Compressor Details (Day Shift Only) -->
-            <div class="mb-10">
-                <h3 class="font-semibold mb-3">Compressor Details (Day Shift)</h3>
-                <table class="w-full border text-sm" id="compressor-table">
-                    <thead class="bg-gray-100">
-                        <tr>
-                            <th class="p-3">Sr.</th>
-                            <th class="p-3">Vendor Name</th>
-                            <th class="p-3">Working</th>
-                            <th class="p-3">Output</th>
-                            <th class="p-3">Purpose</th>
-                        </tr>
-                    </thead>
-                    <tbody id="compressor-tbody" class="divide-y"></tbody>
-                </table>
-                <button onclick="addCompressorRow()" class="mt-3 px-5 py-2 bg-blue-600 text-white rounded-lg text-sm">+ Add Compressor</button>
-            </div>
-
-            <!-- Boulder Output -->
-            <div>
-                <h3 class="font-semibold mb-3">Boulder Output</h3>
-                <table class="w-full border text-sm">
-                    <thead class="bg-gray-100">
-                        <tr>
-                            <th class="p-3">Sr.</th>
-                            <th class="p-3">Size</th>
-                            <th class="p-3">Qty (MT)</th>
-                            <th class="p-3">Recovery (%)</th>
-                        </tr>
-                    </thead>
-                    <tbody id="boulder-tbody" class="divide-y"></tbody>
-                </table>
-                <button onclick="addBoulderRow()" class="mt-3 px-5 py-2 bg-blue-600 text-white rounded-lg text-sm">+ Add Size</button>
-            </div>
-        </div>
-
-        <!-- ====================== 3. MAINTENANCE ====================== -->
-        <div id="section2" class="section">
-            <h2 class="text-xl font-semibold mb-6 flex items-center gap-2"><i class="fas fa-tools text-amber-600"></i> Maintenance</h2>
-            
-            <table class="w-full border text-sm">
-                <thead class="bg-amber-50">
-                    <tr>
-                        <th class="p-3">Sr.</th>
-                        <th class="p-3">Asset Type</th>
-                        <th class="p-3">Asset Name</th>
-                        <th class="p-3">From Hrs</th>
-                        <th class="p-3">To Hrs</th>
-                        <th class="p-3">Total Hrs</th>
-                    </tr>
-                </thead>
-                <tbody id="maint-tbody" class="divide-y"></tbody>
-            </table>
-            <button onclick="addMaintenanceRow()" class="mt-3 px-5 py-2 bg-amber-600 text-white rounded-lg text-sm">+ Add Maintenance</button>
-        </div>
-
-        <!-- ====================== 4. BOULDER TRANSFER ====================== -->
-        <div id="section3" class="section">
-            <h2 class="text-xl font-semibold mb-6 flex items-center gap-2"><i class="fas fa-truck text-orange-600"></i> Boulder Transfer</h2>
-            
-            <!-- Machinery Work Hours -->
-            <div class="mb-10">
-                <h3 class="font-semibold mb-3">Machinery Work Hours</h3>
-                <table class="w-full border text-sm">
-                    <thead class="bg-gray-100">
-                        <tr>
-                            <th class="p-3">Sr.</th>
-                            <th class="p-3">Equipment</th>
-                            <th class="p-3">From</th>
-                            <th class="p-3">To</th>
-                            <th class="p-3">Total Hrs</th>
-                        </tr>
-                    </thead>
-                    <tbody id="machinery-tbody" class="divide-y"></tbody>
-                </table>
-                <button onclick="addMachineryRow()" class="mt-3 px-5 py-2 bg-orange-600 text-white rounded-lg text-sm">+ Add Machinery</button>
-            </div>
-
-            <!-- Tipper Transfer -->
-            <div>
-                <h3 class="font-semibold mb-3">Tipper Transfer Details</h3>
-                <table class="w-full border text-sm">
-                    <thead class="bg-gray-100">
-                        <tr>
-                            <th class="p-3">Sr.</th>
-                            <th class="p-3">Tipper Name</th>
-                            <th class="p-3">No. of Trips</th>
-                            <th class="p-3">Qty (MT)</th>
-                        </tr>
-                    </thead>
-                    <tbody id="transfer-tbody" class="divide-y"></tbody>
-                </table>
-                <button onclick="addTransferRow()" class="mt-3 px-5 py-2 bg-orange-600 text-white rounded-lg text-sm">+ Add Tipper</button>
-            </div>
-        </div>
-
-        <!-- ====================== 5. STOCK ====================== -->
-        <div id="section4" class="section">
-            <h2 class="text-xl font-semibold mb-6 flex items-center gap-2"><i class="fas fa-warehouse text-emerald-600"></i> Stock Details</h2>
-            
-            <table class="w-full border text-sm">
-                <thead class="bg-emerald-50">
-                    <tr>
-                        <th class="p-3">Sr.</th>
-                        <th class="p-3">Boulder Size</th>
-                        <th class="p-3">Opening</th>
-                        <th class="p-3">Production</th>
-                        <th class="p-3">Dispatch</th>
-                        <th class="p-3">Closing</th>
-                        <th class="p-3">Gap (Surveyor / Physical)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr class="border-b">
-                        <td class="p-3">1</td>
-                        <td class="p-3">&gt;300 MM</td>
-                        <td class="p-3 text-center">0.00</td>
-                        <td class="p-3 text-center">0.00</td>
-                        <td class="p-3 text-center">0.00</td>
-                        <td class="p-3 text-center">0.00</td>
-                        <td class="p-3"><input type="number" class="border rounded p-1 w-24"></td>
-                    </tr>
-                    <tr class="border-b">
-                        <td class="p-3">2</td>
-                        <td class="p-3">20 - 550 MM</td>
-                        <td class="p-3 text-center">105888.69</td>
-                        <td class="p-3 text-center">105888.69</td>
-                        <td class="p-3 text-center">0.00</td>
-                        <td class="p-3 text-center">0.00</td>
-                        <td class="p-3"><input type="number" class="border rounded p-1 w-24"></td>
-                    </tr>
-                    <tr>
-                        <td class="p-3">3</td>
-                        <td class="p-3">20 - 550 MM</td>
-                        <td class="p-3 text-center">202789.91</td>
-                        <td class="p-3 text-center">202789.91</td>
-                        <td class="p-3 text-center">0.00</td>
-                        <td class="p-3 text-center">0.00</td>
-                        <td class="p-3"><input type="number" class="border rounded p-1 w-24"></td>
-                    </tr>
-                </tbody>
-            </table>
         </div>
     </div>
 
-    <!-- Submit Bar -->
-    <div class="bg-gray-50 border-t p-6 flex justify-end gap-4 sticky bottom-0">
-        <button onclick="alert('Draft Saved Successfully!')" class="px-8 py-3 border border-gray-400 rounded-xl font-medium hover:bg-gray-100">
-            Save Draft
-        </button>
-        <button onclick="submitReport()" class="px-10 py-3 bg-green-600 hover:bg-green-700 text-white rounded-xl font-semibold flex items-center gap-2">
-            <i class="fas fa-check"></i> Submit Report
-        </button>
-    </div>
-</div>
+    <script>
+        // Tab switching
+        function showSection(n) {
+            document.querySelectorAll('.section-content').forEach(sec => {
+                sec.classList.add('hidden');
+            });
+            document.getElementById(`section-${n}`).classList.remove('hidden');
 
-<script>
-function switchTab(n) {
-    document.querySelectorAll('.section').forEach(s => s.classList.remove('section-active'));
-    document.getElementById('section'+n).classList.add('section-active');
-    
-    document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('nav-tab-active'));
-    document.getElementById('tab'+n).classList.add('nav-tab-active');
-}
+            // Update active tab
+            document.querySelectorAll('.nav-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.getElementById(`tab-${n}`).classList.add('active');
+        }
 
-// Add Row Functions
-function addCompressorRow() {
-    const tbody = document.getElementById('compressor-tbody');
-    const row = document.createElement('tr');
-    row.innerHTML = `
-        <td class="p-3">${tbody.children.length + 1}</td>
-        <td class="p-3"><input type="text" class="border rounded p-2 w-full" placeholder="Vendor"></td>
-        <td class="p-3"><input type="text" class="border rounded p-2 w-full" placeholder="Yes/No"></td>
-        <td class="p-3"><input type="text" class="border rounded p-2 w-full"></td>
-        <td class="p-3"><input type="text" class="border rounded p-2 w-full"></td>
-    `;
-    tbody.appendChild(row);
-}
+        // Row functions (same as original)
+        function addBoulderRow() {
+            const tbody = document.getElementById('boulder-tbody');
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td class="p-3">${tbody.children.length + 1}</td>
+                <td class="p-3"><select class="border rounded p-1 w-full"><option>Select Product Size</option></select></td>
+                <td class="p-3"><input type="number" class="border rounded p-1 w-full"></td>
+                <td class="p-3"><input type="number" class="border rounded p-1 w-full"></td>
+                <td class="p-3 text-center"><button onclick="this.parentElement.parentElement.remove()" class="text-red-600">Remove</button></td>
+            `;
+            tbody.appendChild(row);
+        }
 
-function addBoulderRow() {
-    const tbody = document.getElementById('boulder-tbody');
-    const row = document.createElement('tr');
-    row.innerHTML = `
-        <td class="p-3">${tbody.children.length + 1}</td>
-        <td class="p-3"><input type="text" class="border rounded p-2 w-full" placeholder="Size"></td>
-        <td class="p-3"><input type="number" class="border rounded p-2 w-full"></td>
-        <td class="p-3"><input type="number" class="border rounded p-2 w-full"></td>
-    `;
-    tbody.appendChild(row);
-}
+        function addCompressorRow() {
+            const tbody = document.getElementById('compressor-tbody');
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td class="p-3">${tbody.children.length + 1}</td>
+                <td class="p-3"><input type="text" class="border rounded p-1 w-full" placeholder="Vendor"></td>
+                <td class="p-3"><input type="text" class="border rounded p-1 w-full"></td>
+                <td class="p-3"><input type="text" class="border rounded p-1 w-full"></td>
+                <td class="p-3"><input type="text" class="border rounded p-1 w-full"></td>
+                <td class="p-3 text-center"><button onclick="this.parentElement.parentElement.remove()" class="text-red-600">Remove</button></td>
+            `;
+            tbody.appendChild(row);
+        }
 
-function addMaintenanceRow() {
-    const tbody = document.getElementById('maint-tbody');
-    const row = document.createElement('tr');
-    row.innerHTML = `
-        <td class="p-3">${tbody.children.length + 1}</td>
-        <td class="p-3"><input type="text" class="border rounded p-2 w-full"></td>
-        <td class="p-3"><input type="text" class="border rounded p-2 w-full"></td>
-        <td class="p-3"><input type="time" class="border rounded p-2 w-full"></td>
-        <td class="p-3"><input type="time" class="border rounded p-2 w-full"></td>
-        <td class="p-3"><input type="text" class="border rounded p-2 w-full" placeholder="HH:MM"></td>
-    `;
-    tbody.appendChild(row);
-}
+        function addEquipmentRow() {
+            const tbody = document.getElementById('equipment-tbody');
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td class="p-3">${tbody.children.length + 1}</td>
+                <td class="p-3"><input type="text" class="border rounded p-1 w-full" placeholder="Equipment"></td>
+                <td class="p-3"><input type="text" class="border rounded p-1 w-full"></td>
+                <td class="p-3"><input type="text" class="border rounded p-1 w-full"></td>
+                <td class="p-3"><input type="time" class="border rounded p-1 w-full"></td>
+                <td class="p-3"><input type="time" class="border rounded p-1 w-full"></td>
+                <td class="p-3"><input type="text" class="border rounded p-1 w-full" placeholder="HH:MM"></td>
+                <td class="p-3"><input type="text" class="border rounded p-1 w-full" placeholder="HH:MM"></td>
+                <td class="p-3"><input type="number" class="border rounded p-1 w-full"></td>
+                <td class="p-3"><input type="number" class="border rounded p-1 w-full"></td>
+                <td class="p-3"><input type="number" class="border rounded p-1 w-full"></td>
+            `;
+            tbody.appendChild(row);
+        }
 
-function addMachineryRow() {
-    const tbody = document.getElementById('machinery-tbody');
-    const row = document.createElement('tr');
-    row.innerHTML = `
-        <td class="p-3">${tbody.children.length + 1}</td>
-        <td class="p-3"><input type="text" class="border rounded p-2 w-full" placeholder="Excavator / Breaker"></td>
-        <td class="p-3"><input type="time" class="border rounded p-2 w-full"></td>
-        <td class="p-3"><input type="time" class="border rounded p-2 w-full"></td>
-        <td class="p-3"><input type="text" class="border rounded p-2 w-full" placeholder="HH:MM"></td>
-    `;
-    tbody.appendChild(row);
-}
+        function addMaintenanceRow() {
+            const tbody = document.getElementById('maint-tbody');
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td class="p-3">${tbody.children.length + 1}</td>
+                <td class="p-3"><input type="text" class="border rounded p-1 w-full"></td>
+                <td class="p-3"><input type="text" class="border rounded p-1 w-full"></td>
+                <td class="p-3"><input type="time" class="border rounded p-1 w-full"></td>
+                <td class="p-3"><input type="time" class="border rounded p-1 w-full"></td>
+                <td class="p-3"><input type="text" class="border rounded p-1 w-full" placeholder="HH:MM"></td>
+            `;
+            tbody.appendChild(row);
+        }
 
-function addTransferRow() {
-    const tbody = document.getElementById('transfer-tbody');
-    const row = document.createElement('tr');
-    row.innerHTML = `
-        <td class="p-3">${tbody.children.length + 1}</td>
-        <td class="p-3"><input type="text" class="border rounded p-2 w-full"></td>
-        <td class="p-3"><input type="number" class="border rounded p-2 w-full"></td>
-        <td class="p-3"><input type="number" class="border rounded p-2 w-full"></td>
-    `;
-    tbody.appendChild(row);
-}
+        function addTipperRow() {
+            const tbody = document.getElementById('tipper-tbody');
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td class="p-3">${tbody.children.length + 1}</td>
+                <td class="p-3"><input type="text" class="border rounded p-1 w-full"></td>
+                <td class="p-3"><select class="border rounded p-1 w-full"><option>Working</option><option>Breakdown</option></select></td>
+                <td class="p-3"><input type="number" class="border rounded p-1 w-full"></td>
+                <td class="p-3"><input type="number" class="border rounded p-1 w-full"></td>
+                <td class="p-3"><input type="date" class="border rounded p-1 w-full"></td>
+                <td class="p-3"><input type="time" class="border rounded p-1 w-full"></td>
+                <td class="p-3"><input type="text" class="border rounded p-1 w-full"></td>
+            `;
+            tbody.appendChild(row);
+        }
 
-function submitReport() {
-    alert("✅ Report Submitted Successfully for 12/05/2026 (Day Shift)!");
-}
+        function addTransferRow() {
+            const tbody = document.getElementById('transfer-tbody');
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td class="p-3">${tbody.children.length + 1}</td>
+                <td class="p-3"><input type="text" class="border rounded p-1 w-full"></td>
+                <td class="p-3"><input type="number" class="border rounded p-1 w-full"></td>
+                <td class="p-3"><input type="number" class="border rounded p-1 w-full"></td>
+            `;
+            tbody.appendChild(row);
+        }
 
-// Initialize default rows
-window.onload = () => {
-    addCompressorRow();
-    addBoulderRow();
-    addMaintenanceRow();
-    addMachineryRow();
-    addTransferRow();
-};
-</script>
+        function submitForm() {
+            alert("✅ Report Submitted Successfully!\n\nAll sections data has been recorded.");
+        }
+
+        // Initialize default rows
+        window.onload = function() {
+            addBoulderRow();
+            addCompressorRow();
+            addEquipmentRow();
+            addMaintenanceRow();
+            addTipperRow();
+            addTransferRow();
+            
+            // Show first section by default
+            showSection(0);
+        };
+    </script>
 </body>
 </html>
