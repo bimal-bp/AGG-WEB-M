@@ -4,439 +4,1195 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mine Operation Book</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        .section-header { background: linear-gradient(to right, #1e3a8a, #3b82f6); }
-        table { border-collapse: collapse; }
-        th, td { border: 1px solid #d1d5db; }
-        .nav-tab {
-            transition: all 0.3s;
+        :root {
+            --navy: #0d1b2a;
+            --navy-mid: #1b2d42;
+            --navy-light: #253d5b;
+            --steel: #2e5272;
+            --accent-day: #f59e0b;
+            --accent-day-light: #fef3c7;
+            --accent-night: #6366f1;
+            --accent-night-light: #eef2ff;
+            --gold: #d97706;
+            --emerald: #10b981;
+            --red: #ef4444;
+            --surface: #f8fafc;
+            --border: #e2e8f0;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
         }
-        .nav-tab.active {
-            background-color: #1e40af;
-            color: white;
-            border-bottom: 4px solid #60a5fa;
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Barlow', sans-serif;
+            background: #eef2f7;
+            background-image:
+                radial-gradient(circle at 20% 20%, rgba(13,27,42,0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(99,102,241,0.06) 0%, transparent 50%);
+            min-height: 100vh;
+            color: var(--text-main);
         }
-        .calendar-day {
-            height: 110px;
+
+        /* ─── Layout ─── */
+        .shell {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .card {
+            background: #fff;
+            border-radius: 20px;
+            box-shadow: 0 4px 24px rgba(13,27,42,0.10), 0 1px 4px rgba(13,27,42,0.05);
+            overflow: hidden;
+        }
+
+        /* ─── Header ─── */
+        .header {
+            background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 40%, var(--steel) 100%);
+            padding: 28px 36px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            right: -60px; top: -60px;
+            width: 280px; height: 280px;
+            background: radial-gradient(circle, rgba(245,158,11,0.15) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .header-brand {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .header-icon {
+            width: 56px; height: 56px;
+            background: rgba(245,158,11,0.2);
+            border: 2px solid rgba(245,158,11,0.4);
+            border-radius: 16px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 24px; color: var(--accent-day);
+        }
+
+        .header-title {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: 0.5px;
+        }
+
+        .header-sub {
+            font-size: 13px;
+            color: rgba(255,255,255,0.55);
+            margin-top: 2px;
+            font-weight: 400;
+        }
+
+        .header-date-display {
+            text-align: right;
+        }
+
+        .header-month {
+            font-size: 12px;
+            color: rgba(255,255,255,0.5);
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .header-selected {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 22px;
+            font-weight: 600;
+            color: #fff;
+            margin-top: 2px;
+        }
+
+        /* ─── Body ─── */
+        .body {
+            display: flex;
+            height: calc(100vh - 160px);
+            min-height: 600px;
+        }
+
+        /* ─── Calendar Sidebar ─── */
+        .sidebar {
+            width: 300px;
+            flex-shrink: 0;
+            background: var(--surface);
+            border-right: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .cal-nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 18px 20px 14px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .cal-nav-btn {
+            width: 34px; height: 34px;
+            border: 1px solid var(--border);
+            background: #fff;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 13px;
+            color: var(--text-muted);
+            transition: all 0.2s;
+            display: flex; align-items: center; justify-content: center;
+        }
+
+        .cal-nav-btn:hover {
+            background: var(--navy);
+            color: #fff;
+            border-color: var(--navy);
+        }
+
+        .cal-month-label {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--navy);
+        }
+
+        .cal-weekdays {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            padding: 8px 12px 4px;
+            gap: 2px;
+        }
+
+        .cal-wd {
+            text-align: center;
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .cal-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            padding: 4px 12px 12px;
+            gap: 3px;
+            overflow-y: auto;
+        }
+
+        .cal-day {
+            aspect-ratio: 1;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.15s;
+            padding: 2px;
+            border: 1.5px solid transparent;
+        }
+
+        .cal-day:hover {
+            background: #f1f5f9;
+        }
+
+        .cal-day.selected {
+            background: var(--navy);
+            border-color: var(--navy);
+        }
+
+        .cal-day.selected .day-num {
+            color: #fff;
+        }
+
+        .cal-day.today-ring {
+            border-color: var(--accent-day);
+        }
+
+        .cal-day.pad {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .day-num {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-main);
+            line-height: 1;
+        }
+
+        .day-dots {
+            display: flex;
+            gap: 2px;
+            margin-top: 3px;
+        }
+
+        .dot {
+            width: 5px; height: 5px;
+            border-radius: 50%;
+        }
+
+        .dot-day { background: var(--accent-day); }
+        .dot-night { background: var(--accent-night); }
+        .dot-none { background: transparent; }
+
+        /* ─── Main Content ─── */
+        .main {
+            flex: 1;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ─── Landing Screen (date selected, no shift yet) ─── */
+        #screen-landing {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 24px;
+            padding: 40px;
+        }
+
+        .landing-prompt {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 26px;
+            font-weight: 700;
+            color: var(--navy);
+            text-align: center;
+        }
+
+        .landing-date-badge {
+            background: linear-gradient(135deg, var(--navy), var(--steel));
+            color: #fff;
+            padding: 12px 32px;
+            border-radius: 50px;
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 20px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .landing-prompt-sub {
+            color: var(--text-muted);
+            font-size: 15px;
+            text-align: center;
+        }
+
+        .shift-cards {
+            display: flex;
+            gap: 24px;
+            margin-top: 8px;
+        }
+
+        .shift-card {
+            flex: 1;
+            max-width: 200px;
+            border: 2px solid var(--border);
+            border-radius: 20px;
+            padding: 32px 24px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: #fff;
+        }
+
+        .shift-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(0,0,0,0.1);
+        }
+
+        .shift-card.day-card:hover, .shift-card.day-card.active {
+            border-color: var(--accent-day);
+            background: var(--accent-day-light);
+        }
+
+        .shift-card.night-card:hover, .shift-card.night-card.active {
+            border-color: var(--accent-night);
+            background: var(--accent-night-light);
+        }
+
+        .shift-card-icon {
+            font-size: 40px;
+            margin-bottom: 12px;
+        }
+
+        .shift-card-title {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--navy);
+        }
+
+        .shift-card-time {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        /* ─── Report Screen ─── */
+        #screen-report {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* Shift Bar */
+        .shift-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 28px;
+            background: #fff;
+            border-bottom: 1px solid var(--border);
+            flex-shrink: 0;
+        }
+
+        .shift-bar-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .shift-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 18px;
+            border-radius: 50px;
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
             transition: all 0.2s;
         }
-        .calendar-day:hover {
-            background-color: #f3f4f6;
+
+        .shift-badge.day-badge {
+            background: var(--accent-day-light);
+            color: var(--gold);
+            border: 1.5px solid var(--accent-day);
         }
-        .calendar-day.today {
-            background-color: #fefce8;
-            border: 2px solid #eab308;
+
+        .shift-badge.night-badge {
+            background: var(--accent-night-light);
+            color: var(--accent-night);
+            border: 1.5px solid var(--accent-night);
         }
-        .shift-icon {
-            width: 22px;
-            height: 22px;
+
+        .shift-bar-date {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--navy);
         }
-        .modal {
-            animation: modalPop 0.3s ease;
+
+        .shift-bar-right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
-        @keyframes modalPop {
-            from { transform: scale(0.8); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 9px 20px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all 0.18s;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1.5px solid var(--border);
+            color: var(--text-muted);
+        }
+
+        .btn-outline:hover { background: var(--surface); }
+
+        .btn-success {
+            background: var(--emerald);
+            color: #fff;
+        }
+
+        .btn-success:hover { background: #059669; }
+
+        .btn-change {
+            background: transparent;
+            border: 1.5px solid var(--border);
+            color: var(--text-muted);
+            font-size: 13px;
+            padding: 6px 14px;
+            border-radius: 8px;
+        }
+
+        /* Report Content Scroll */
+        .report-scroll {
+            flex: 1;
+            overflow-y: auto;
+            padding: 28px 32px;
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+        }
+
+        /* Section Block */
+        .section-block {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .section-head {
+            padding: 16px 24px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .section-head.day-head {
+            background: linear-gradient(90deg, #fffbeb, #fff);
+        }
+
+        .section-head.night-head {
+            background: linear-gradient(90deg, #eef2ff, #fff);
+        }
+
+        .section-head i {
+            font-size: 16px;
+        }
+
+        .section-title {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 17px;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+        }
+
+        .day-head .section-title { color: var(--gold); }
+        .night-head .section-title { color: var(--accent-night); }
+
+        .section-body {
+            padding: 20px 24px;
+        }
+
+        /* Grid fields */
+        .field-grid {
+            display: grid;
+            gap: 14px;
+        }
+
+        .field-grid-4 { grid-template-columns: repeat(4, 1fr); }
+        .field-grid-3 { grid-template-columns: repeat(3, 1fr); }
+        .field-grid-2 { grid-template-columns: repeat(2, 1fr); }
+
+        .field-item {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .field-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .field-input {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1.5px solid var(--border);
+            border-radius: 10px;
+            font-family: 'Barlow', sans-serif;
+            font-size: 14px;
+            color: var(--text-main);
+            background: var(--surface);
+            transition: border-color 0.2s;
+            outline: none;
+        }
+
+        .field-input:focus {
+            border-color: var(--steel);
+            background: #fff;
+        }
+
+        textarea.field-input {
+            resize: vertical;
+            min-height: 90px;
+        }
+
+        /* Inner Tabs */
+        .tabs-row {
+            display: flex;
+            border-bottom: 1px solid var(--border);
+            padding: 0 24px;
+            background: var(--surface);
+        }
+
+        .tab-btn {
+            padding: 13px 20px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-muted);
+            cursor: pointer;
+            border: none;
+            background: none;
+            border-bottom: 3px solid transparent;
+            transition: all 0.18s;
+            letter-spacing: 0.2px;
+        }
+
+        .tab-btn.active {
+            color: var(--navy);
+            border-bottom-color: var(--navy);
+        }
+
+        .tab-btn:hover:not(.active) {
+            color: var(--text-main);
+        }
+
+        .tab-panel { display: none; }
+        .tab-panel.active { display: block; }
+
+        /* Tables */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+
+        .data-table th {
+            padding: 11px 14px;
+            text-align: left;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-muted);
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .data-table td {
+            padding: 8px 10px;
+            border-bottom: 1px solid #f1f5f9;
+            vertical-align: middle;
+        }
+
+        .data-table tbody tr:last-child td { border-bottom: none; }
+        .data-table tbody tr:hover td { background: #f8fafc; }
+
+        .table-input {
+            width: 100%;
+            padding: 7px 10px;
+            border: 1.5px solid var(--border);
+            border-radius: 8px;
+            font-size: 13px;
+            font-family: 'Barlow', sans-serif;
+            background: #fff;
+            outline: none;
+        }
+
+        .table-input:focus { border-color: var(--steel); }
+
+        .btn-add {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 12px;
+            padding: 8px 18px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all 0.18s;
+        }
+
+        .btn-add-day {
+            background: var(--accent-day-light);
+            color: var(--gold);
+            border: 1.5px solid var(--accent-day);
+        }
+
+        .btn-add-night {
+            background: var(--accent-night-light);
+            color: var(--accent-night);
+            border: 1.5px solid var(--accent-night);
+        }
+
+        .btn-del {
+            background: none;
+            border: none;
+            color: #cbd5e1;
+            cursor: pointer;
+            font-size: 16px;
+            padding: 2px 6px;
+            border-radius: 6px;
+            transition: all 0.15s;
+        }
+
+        .btn-del:hover { color: var(--red); background: #fff1f2; }
+
+        /* File upload */
+        .file-zone {
+            border: 2px dashed var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .file-zone:hover {
+            border-color: var(--steel);
+            background: #f8fafc;
+        }
+
+        .file-zone input[type=file] {
+            display: none;
+        }
+
+        .file-zone-label {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        .file-zone-label span {
+            color: var(--steel);
+            font-weight: 600;
+        }
+
+        /* ─── Responsive ─── */
+        @media (max-width: 900px) {
+            .sidebar { width: 220px; }
+            .field-grid-4 { grid-template-columns: repeat(2, 1fr); }
+            .field-grid-3 { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 650px) {
+            .body { flex-direction: column; height: auto; }
+            .sidebar { width: 100%; height: 260px; }
+            .shift-cards { flex-direction: column; }
         }
     </style>
 </head>
-<body class="bg-gray-100 font-sans">
-    <div class="max-w-7xl mx-auto p-6">
-        <!-- Main Container -->
-        <div class="bg-white rounded-3xl shadow-2xl overflow-hidden">
-            
-            <!-- Top Header -->
-            <div class="section-header text-white p-6 flex items-center justify-between">
-                <div class="flex items-center gap-3">
-                    <i class="fas fa-mountain text-4xl"></i>
-                    <div>
-                        <h1 class="text-3xl font-bold tracking-tight">Mine Operation Book</h1>
-                        <p class="text-blue-200 text-sm">AG - Anakapalli • Calyx Container Terminals Pvt. Ltd.</p>
-                    </div>
-                </div>
-                <div class="text-right">
-                    <p class="text-sm opacity-75">May 2026</p>
-                    <p id="selected-date-display" class="font-semibold text-xl">12 May 2026</p>
-                </div>
+<body>
+<div class="shell">
+<div class="card">
+
+    <!-- ─ Header ─ -->
+    <div class="header">
+        <div class="header-brand">
+            <div class="header-icon"><i class="fas fa-mountain"></i></div>
+            <div>
+                <div class="header-title">Mine Operation Book</div>
+                <div class="header-sub">AG – Anakapalli &nbsp;•&nbsp; Calyx Container Terminals Pvt. Ltd.</div>
+            </div>
+        </div>
+        <div class="header-date-display">
+            <div class="header-month" id="hdr-month">May 2026</div>
+            <div class="header-selected" id="hdr-date">Select a date</div>
+        </div>
+    </div>
+
+    <!-- ─ Body ─ -->
+    <div class="body">
+
+        <!-- Sidebar Calendar -->
+        <div class="sidebar">
+            <div class="cal-nav">
+                <button class="cal-nav-btn" onclick="prevMonth()"><i class="fas fa-chevron-left"></i></button>
+                <span class="cal-month-label" id="cal-month">May 2026</span>
+                <button class="cal-nav-btn" onclick="nextMonth()"><i class="fas fa-chevron-right"></i></button>
+            </div>
+            <div class="cal-weekdays">
+                <div class="cal-wd">S</div><div class="cal-wd">M</div><div class="cal-wd">T</div>
+                <div class="cal-wd">W</div><div class="cal-wd">T</div><div class="cal-wd">F</div><div class="cal-wd">S</div>
+            </div>
+            <div class="cal-grid" id="cal-grid"></div>
+        </div>
+
+        <!-- Main Panel -->
+        <div class="main">
+            <!-- Screen A: Pick shift (shown after date is clicked) -->
+            <div id="screen-landing">
+                <div class="landing-prompt">Select a date to get started</div>
+                <div class="landing-prompt-sub">Click any day on the calendar to begin entering shift data.</div>
+                <!-- shifts will appear dynamically below -->
             </div>
 
-            <div class="flex">
-                <!-- Calendar Sidebar -->
-                <div class="w-96 border-r bg-gray-50 p-4 overflow-y-auto" style="max-height: calc(100vh - 120px);">
-                    <div class="flex items-center justify-between mb-4 px-2">
-                        <button onclick="prevMonth()" class="p-2 hover:bg-gray-200 rounded-xl">
-                            <i class="fas fa-chevron-left"></i>
-                        </button>
-                        <div class="font-semibold text-lg" id="calendar-month">May 2026</div>
-                        <button onclick="nextMonth()" class="p-2 hover:bg-gray-200 rounded-xl">
-                            <i class="fas fa-chevron-right"></i>
-                        </button>
-                    </div>
+            <!-- Screen B: Report form -->
+            <div id="screen-report" style="display:none">
 
-                    <!-- Weekday Headers -->
-                    <div class="grid grid-cols-7 text-center text-xs font-medium text-gray-500 mb-1">
-                        <div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>
+                <div class="shift-bar">
+                    <div class="shift-bar-left">
+                        <div id="active-shift-badge" class="shift-badge day-badge">
+                            <i class="fas fa-sun"></i> Day Shift
+                        </div>
+                        <div class="shift-bar-date" id="shift-bar-date">12 May 2026</div>
                     </div>
-
-                    <!-- Calendar Grid -->
-                    <div id="calendar-grid" class="grid grid-cols-7 gap-1 text-sm"></div>
+                    <div class="shift-bar-right">
+                        <button class="btn-change" onclick="changeShift()"><i class="fas fa-exchange-alt"></i> Change Shift</button>
+                        <button class="btn btn-outline" onclick="saveDraft()"><i class="fas fa-save"></i> Save Draft</button>
+                        <button class="btn btn-success" onclick="submitReport()"><i class="fas fa-paper-plane"></i> Submit</button>
+                    </div>
                 </div>
 
-                <!-- Main Report Area -->
-                <div class="flex-1">
-                    <!-- Shift Selection Bar -->
-                    <div class="bg-white border-b px-8 py-4 flex items-center gap-6">
-                        <div class="flex items-center gap-2">
-                            <span class="font-medium text-gray-600">Shift:</span>
-                            <button onclick="selectShift('day')" id="day-btn"
-                                class="px-6 py-2 rounded-2xl font-semibold flex items-center gap-2 transition-all active-shift">
-                                <i class="fas fa-sun text-yellow-500"></i>
-                                <span>Day Shift</span>
-                            </button>
-                            <button onclick="selectShift('night')" id="night-btn"
-                                class="px-6 py-2 rounded-2xl font-semibold flex items-center gap-2 transition-all">
-                                <i class="fas fa-moon text-indigo-500"></i>
-                                <span>Night Shift</span>
-                            </button>
+                <div class="report-scroll" id="report-scroll">
+                    <!-- Day-only: Quarry section -->
+                    <div class="section-block" id="quarry-section">
+                        <div class="section-head day-head">
+                            <i class="fas fa-bomb" style="color:var(--gold)"></i>
+                            <span class="section-title">QUARRY / INPUT DETAILS</span>
                         </div>
-                        
-                        <div class="ml-auto flex items-center gap-4 text-sm">
-                            <div class="bg-emerald-100 text-emerald-700 px-4 py-1.5 rounded-2xl flex items-center gap-2">
-                                <i class="fas fa-check-circle"></i>
-                                <span id="status-text">Working</span>
+                        <div class="section-body">
+                            <div class="field-grid field-grid-4">
+                                <div class="field-item">
+                                    <label class="field-label">No. of Compressors</label>
+                                    <input type="number" class="field-input" id="q-comp" placeholder="0">
+                                </div>
+                                <div class="field-item">
+                                    <label class="field-label">No. of Holes</label>
+                                    <input type="number" class="field-input" id="q-holes" placeholder="0">
+                                </div>
+                                <div class="field-item">
+                                    <label class="field-label">Depth (ft)</label>
+                                    <input type="number" class="field-input" id="q-depth" placeholder="0">
+                                </div>
+                                <div class="field-item">
+                                    <label class="field-label">Total Feet</label>
+                                    <input type="number" class="field-input" id="q-total" placeholder="0">
+                                </div>
                             </div>
-                            <button onclick="saveDraft()" 
-                                class="px-6 py-2 border border-gray-300 rounded-2xl hover:bg-gray-50 flex items-center gap-2">
-                                <i class="fas fa-save"></i> Save Draft
-                            </button>
-                            <button onclick="submitReport()" 
-                                class="px-8 py-2 bg-green-600 hover:bg-green-700 text-white rounded-2xl font-semibold flex items-center gap-2">
-                                <i class="fas fa-paper-plane"></i> Submit
-                            </button>
                         </div>
                     </div>
 
-                    <!-- Report Content -->
-                    <div class="p-8 space-y-10 overflow-auto" style="max-height: calc(100vh - 220px);">
-                        
-                        <!-- Quarry Section (Only for Day Shift) -->
-                        <div id="quarry-section">
-                            <h2 class="text-2xl font-bold text-blue-700 mb-6 flex items-center gap-3">
-                                <i class="fas fa-bomb"></i> QUARRY / INPUT DETAILS
-                            </h2>
-                            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-                                <div class="bg-gray-50 p-4 rounded-2xl">
-                                    <label class="block text-sm font-medium text-gray-600">No. of Compressor</label>
-                                    <input type="number" id="comp-count" class="w-full mt-1 border rounded-xl p-3" value="2">
-                                </div>
-                                <div class="bg-gray-50 p-4 rounded-2xl">
-                                    <label class="block text-sm font-medium text-gray-600">No. of Holes</label>
-                                    <input type="number" id="holes-count" class="w-full mt-1 border rounded-xl p-3" value="45">
-                                </div>
-                                <div class="bg-gray-50 p-4 rounded-2xl">
-                                    <label class="block text-sm font-medium text-gray-600">Depth (ft)</label>
-                                    <input type="number" id="depth" class="w-full mt-1 border rounded-xl p-3" value="1200">
-                                </div>
-                                <div class="bg-gray-50 p-4 rounded-2xl">
-                                    <label class="block text-sm font-medium text-gray-600">Total Feet</label>
-                                    <input type="number" id="total-feet" class="w-full mt-1 border rounded-xl p-3" value="54000">
-                                </div>
+                    <!-- Tabs Section: Resource / Maintenance / Boulder / Stock -->
+                    <div class="section-block">
+                        <div class="tabs-row" id="tabs-row">
+                            <!-- tabs injected by JS -->
+                        </div>
+
+                        <!-- Resource (Day only) -->
+                        <div class="tab-panel" id="panel-resource">
+                            <div style="padding:20px 24px">
+                                <p style="font-size:13px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:14px">Compressor Details</p>
+                                <table class="data-table" id="comp-table">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Vendor</th>
+                                            <th>Working?</th>
+                                            <th>Output</th>
+                                            <th>Purpose</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="comp-tbody"></tbody>
+                                </table>
+                                <button class="btn-add btn-add-day" onclick="addCompRow()"><i class="fas fa-plus"></i> Add Compressor</button>
                             </div>
                         </div>
 
-                        <!-- Dynamic Sections via Tabs -->
-                        <div class="bg-white border rounded-3xl">
-                            <!-- Inner Tabs -->
-                            <div class="flex border-b px-6 pt-2">
-                                <button onclick="showInnerTab(0)" id="inner-tab-0" class="inner-tab active px-8 py-4 font-semibold">Resource</button>
-                                <button onclick="showInnerTab(1)" id="inner-tab-1" class="inner-tab px-8 py-4 font-semibold">Maintenance</button>
-                                <button onclick="showInnerTab(2)" id="inner-tab-2" class="inner-tab px-8 py-4 font-semibold">Boulder Transfer</button>
-                                <button onclick="showInnerTab(3)" id="inner-tab-3" class="inner-tab px-8 py-4 font-semibold">Stock</button>
+                        <!-- Maintenance (Day + Night) -->
+                        <div class="tab-panel" id="panel-maintenance">
+                            <div style="padding:20px 24px">
+                                <p style="font-size:13px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:14px">Maintenance Details</p>
+                                <table class="data-table" id="maint-table">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Asset Type</th>
+                                            <th>Asset Name</th>
+                                            <th>From</th>
+                                            <th>To</th>
+                                            <th>Total Hrs</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="maint-tbody"></tbody>
+                                </table>
+                                <button class="btn-add" id="maint-add-btn" onclick="addMaintRow()"><i class="fas fa-plus"></i> Add Entry</button>
                             </div>
+                        </div>
 
-                            <!-- Resource Tab -->
-                            <div id="inner-content-0" class="inner-content p-8">
-                                <!-- Compressor, Equipment, Blasting -->
-                                <div class="space-y-10">
-                                    <div>
-                                        <h3 class="font-bold text-lg mb-4">Compressor Details</h3>
-                                        <table class="w-full text-sm" id="comp-table">
-                                            <thead class="bg-gray-100">
-                                                <tr>
-                                                    <th class="p-3">Sr</th>
-                                                    <th class="p-3">Vendor</th>
-                                                    <th class="p-3">Working</th>
-                                                    <th class="p-3">Output</th>
-                                                    <th class="p-3">Purpose</th>
-                                                    <th class="p-3">Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody></tbody>
-                                        </table>
-                                        <button onclick="addCompressorRow()" class="mt-4 px-5 py-2 bg-blue-600 text-white rounded-2xl text-sm flex items-center gap-2">
-                                            <i class="fas fa-plus"></i> Add Compressor
-                                        </button>
+                        <!-- Boulder Transfer -->
+                        <div class="tab-panel" id="panel-boulder">
+                            <div style="padding:20px 24px">
+                                <p style="font-size:13px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:14px">Tipper-wise Transfer</p>
+                                <table class="data-table" id="boulder-table">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Tipper No.</th>
+                                            <th>Trips</th>
+                                            <th>Load (MT)</th>
+                                            <th>Destination</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="boulder-tbody"></tbody>
+                                </table>
+                                <button class="btn-add btn-add-day" id="boulder-add-btn" onclick="addBoulderRow()"><i class="fas fa-plus"></i> Add Transfer</button>
+                            </div>
+                        </div>
+
+                        <!-- Stock -->
+                        <div class="tab-panel" id="panel-stock">
+                            <div style="padding:20px 24px">
+                                <p style="font-size:13px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:14px">Stock Position</p>
+                                <div class="field-grid field-grid-3" style="margin-bottom:16px">
+                                    <div class="field-item">
+                                        <label class="field-label">Opening Stock (MT)</label>
+                                        <input type="number" class="field-input" id="s-open" placeholder="0">
+                                    </div>
+                                    <div class="field-item">
+                                        <label class="field-label">Production (MT)</label>
+                                        <input type="number" class="field-input" id="s-prod" placeholder="0">
+                                    </div>
+                                    <div class="field-item">
+                                        <label class="field-label">Dispatched (MT)</label>
+                                        <input type="number" class="field-input" id="s-disp" placeholder="0">
+                                    </div>
+                                </div>
+                                <div class="field-grid field-grid-2">
+                                    <div class="field-item">
+                                        <label class="field-label">Closing Stock (MT)</label>
+                                        <input type="number" class="field-input" id="s-close" placeholder="0">
+                                    </div>
+                                    <div class="field-item">
+                                        <label class="field-label">Grade</label>
+                                        <input type="text" class="field-input" id="s-grade" placeholder="e.g. MM40">
                                     </div>
                                 </div>
                             </div>
-
-                            <!-- Maintenance Tab -->
-                            <div id="inner-content-1" class="inner-content p-8 hidden">
-                                <h3 class="font-bold text-lg mb-4">Maintenance Details</h3>
-                                <table class="w-full text-sm" id="maint-table">
-                                    <thead class="bg-amber-50">
-                                        <tr>
-                                            <th class="p-3">Sr</th>
-                                            <th class="p-3">Asset Type</th>
-                                            <th class="p-3">Asset Name</th>
-                                            <th class="p-3">From</th>
-                                            <th class="p-3">To</th>
-                                            <th class="p-3">Total Hrs</th>
-                                            <th class="p-3">Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody></tbody>
-                                </table>
-                                <button onclick="addMaintenanceRow()" class="mt-4 px-5 py-2 bg-amber-600 text-white rounded-2xl text-sm flex items-center gap-2">
-                                    <i class="fas fa-plus"></i> Add Maintenance
-                                </button>
-                            </div>
-
-                            <!-- Other Tabs (simplified) -->
-                            <div id="inner-content-2" class="inner-content p-8 hidden">
-                                <h3 class="font-bold text-lg mb-4">Boulder Transfer</h3>
-                                <p class="text-gray-500">Tipper wise transfer details will appear here.</p>
-                                <!-- Add table similar to original -->
-                            </div>
-                            <div id="inner-content-3" class="inner-content p-8 hidden">
-                                <h3 class="font-bold text-lg mb-4">Stock Details</h3>
-                                <p class="text-gray-500">Current stock position as on selected date.</p>
-                            </div>
                         </div>
+                    </div>
 
-                        <!-- Common Fields -->
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-8 border-t">
-                            <div>
-                                <label class="block text-sm font-medium mb-2">Before Operation Photo</label>
-                                <input type="file" class="block w-full text-sm text-gray-500 file:mr-4 file:py-3 file:px-6 file:rounded-2xl file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700">
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium mb-2">After Operation Photo</label>
-                                <input type="file" class="block w-full text-sm text-gray-500 file:mr-4 file:py-3 file:px-6 file:rounded-2xl file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700">
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium mb-2">Planning Document</label>
-                                <input type="file" class="block w-full text-sm text-gray-500 file:mr-4 file:py-3 file:px-6 file:rounded-2xl file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700">
-                            </div>
+                    <!-- Photos + Remarks -->
+                    <div class="section-block">
+                        <div class="section-head day-head" id="media-head">
+                            <i class="fas fa-camera" style="color:var(--gold)"></i>
+                            <span class="section-title">ATTACHMENTS & REMARKS</span>
                         </div>
-
-                        <div>
-                            <label class="block text-sm font-medium mb-2">Remarks</label>
-                            <textarea id="remarks" class="w-full border rounded-3xl p-5 h-28" placeholder="Any observations or remarks..."></textarea>
+                        <div class="section-body">
+                            <div class="field-grid field-grid-3" style="margin-bottom:20px">
+                                <div class="field-item">
+                                    <label class="field-label">Before Operation Photo</label>
+                                    <label class="file-zone">
+                                        <input type="file" accept="image/*">
+                                        <div style="font-size:24px;color:#cbd5e1;margin-bottom:6px"><i class="fas fa-image"></i></div>
+                                        <div class="file-zone-label"><span>Click to upload</span> or drag & drop</div>
+                                    </label>
+                                </div>
+                                <div class="field-item">
+                                    <label class="field-label">After Operation Photo</label>
+                                    <label class="file-zone">
+                                        <input type="file" accept="image/*">
+                                        <div style="font-size:24px;color:#cbd5e1;margin-bottom:6px"><i class="fas fa-image"></i></div>
+                                        <div class="file-zone-label"><span>Click to upload</span> or drag & drop</div>
+                                    </label>
+                                </div>
+                                <div class="field-item">
+                                    <label class="field-label">Planning Document</label>
+                                    <label class="file-zone">
+                                        <input type="file">
+                                        <div style="font-size:24px;color:#cbd5e1;margin-bottom:6px"><i class="fas fa-file-alt"></i></div>
+                                        <div class="file-zone-label"><span>Click to upload</span> or drag & drop</div>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="field-item">
+                                <label class="field-label">Remarks</label>
+                                <textarea class="field-input" id="remarks" placeholder="Any observations, issues, or remarks for this shift..."></textarea>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
+</div>
 
-    <!-- Shift Confirmation Modal -->
-    <div id="shift-modal" class="hidden fixed inset-0 bg-black/60 flex items-center justify-center z-50">
-        <div class="modal bg-white rounded-3xl shadow-2xl p-8 max-w-md w-full mx-4">
-            <h3 class="text-2xl font-bold mb-6 text-center" id="modal-date">12 May 2026</h3>
-            <p class="text-center text-gray-600 mb-8">Select Shift Type</p>
-            
-            <div class="grid grid-cols-2 gap-4">
-                <button onclick="confirmShift('day')" 
-                    class="p-8 border-2 border-yellow-400 hover:border-yellow-500 rounded-3xl text-center transition-all">
-                    <i class="fas fa-sun text-5xl text-yellow-500 mb-4"></i>
-                    <p class="font-semibold text-xl">Day Shift</p>
-                    <p class="text-sm text-gray-500">08:00 AM - 08:00 PM</p>
-                </button>
-                
-                <button onclick="confirmShift('night')" 
-                    class="p-8 border-2 border-indigo-400 hover:border-indigo-500 rounded-3xl text-center transition-all">
-                    <i class="fas fa-moon text-5xl text-indigo-500 mb-4"></i>
-                    <p class="font-semibold text-xl">Night Shift</p>
-                    <p class="text-sm text-gray-500">08:00 PM - 08:00 AM</p>
-                </button>
+<script>
+// ─── State ───────────────────────────────────────────────
+let curViewDate = new Date(2026, 4, 13);  // calendar view month
+let selDate = null;    // selected date object
+let curShift = null;   // 'day' | 'night'
+const savedShifts = {};  // key: "YYYY-MM-DD", val: {day: bool, night: bool}
+
+// ─── Calendar ─────────────────────────────────────────────
+function renderCalendar() {
+    const grid = document.getElementById('cal-grid');
+    grid.innerHTML = '';
+    const y = curViewDate.getFullYear();
+    const m = curViewDate.getMonth();
+    const label = curViewDate.toLocaleString('en-IN', { month: 'long', year: 'numeric' });
+    document.getElementById('cal-month').textContent = label;
+    document.getElementById('hdr-month').textContent = label;
+
+    const firstDay = new Date(y, m, 1).getDay();
+    const daysInMonth = new Date(y, m + 1, 0).getDate();
+    const today = new Date();
+
+    for (let i = 0; i < firstDay; i++) {
+        const pad = document.createElement('div');
+        pad.className = 'cal-day pad';
+        grid.appendChild(pad);
+    }
+
+    for (let d = 1; d <= daysInMonth; d++) {
+        const key = `${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+        const el = document.createElement('div');
+        el.className = 'cal-day';
+
+        const isToday = d === today.getDate() && m === today.getMonth() && y === today.getFullYear();
+        if (isToday) el.classList.add('today-ring');
+
+        const isSel = selDate && d === selDate.getDate() && m === selDate.getMonth() && y === selDate.getFullYear();
+        if (isSel) el.classList.add('selected');
+
+        const shifts = savedShifts[key] || {};
+        const dotDay   = shifts.day   ? '<div class="dot dot-day"></div>'   : '';
+        const dotNight = shifts.night ? '<div class="dot dot-night"></div>' : '';
+
+        el.innerHTML = `<span class="day-num">${d}</span><div class="day-dots">${dotDay}${dotNight}</div>`;
+        el.onclick = () => onDateClick(y, m, d);
+        grid.appendChild(el);
+    }
+}
+
+function prevMonth() { curViewDate.setMonth(curViewDate.getMonth() - 1); renderCalendar(); }
+function nextMonth() { curViewDate.setMonth(curViewDate.getMonth() + 1); renderCalendar(); }
+
+// ─── Date Click → show shift picker ─────────────────────
+function onDateClick(y, m, d) {
+    selDate = new Date(y, m, d);
+    const label = selDate.toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' });
+    document.getElementById('hdr-date').textContent = label;
+    renderCalendar();
+
+    // Show shift picker in landing screen
+    document.getElementById('screen-report').style.display = 'none';
+    const landing = document.getElementById('screen-landing');
+    landing.style.display = 'flex';
+    landing.innerHTML = `
+        <div class="landing-prompt">Choose Shift for</div>
+        <div class="landing-date-badge">${label}</div>
+        <div class="landing-prompt-sub">Select the shift type to enter operation data</div>
+        <div class="shift-cards">
+            <div class="shift-card day-card" onclick="openShift('day')">
+                <div class="shift-card-icon">☀️</div>
+                <div class="shift-card-title">Day Shift</div>
+                <div class="shift-card-time">08:00 AM – 08:00 PM</div>
             </div>
-            
-            <button onclick="closeModal()" 
-                class="mt-6 w-full py-4 text-gray-500 hover:bg-gray-100 rounded-2xl font-medium">
-                Cancel
-            </button>
+            <div class="shift-card night-card" onclick="openShift('night')">
+                <div class="shift-card-icon">🌙</div>
+                <div class="shift-card-title">Night Shift</div>
+                <div class="shift-card-time">08:00 PM – 08:00 AM</div>
+            </div>
         </div>
-    </div>
+    `;
+}
 
-    <script>
-        // Current date tracking
-        let currentDate = new Date(2026, 4, 12); // May 12, 2026
-        let selectedDate = new Date(2026, 4, 12);
-        let currentShift = 'day';
+// ─── Open Shift Report ────────────────────────────────────
+function openShift(shift) {
+    curShift = shift;
+    document.getElementById('screen-landing').style.display = 'none';
+    document.getElementById('screen-report').style.display = 'flex';
 
-        // Tailwind script already loaded
+    const label = selDate.toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' });
+    document.getElementById('shift-bar-date').textContent = label;
 
-        function renderCalendar() {
-            const grid = document.getElementById('calendar-grid');
-            grid.innerHTML = '';
-            
-            const year = currentDate.getFullYear();
-            const month = currentDate.getMonth();
-            
-            document.getElementById('calendar-month').textContent = 
-                currentDate.toLocaleString('default', { month: 'long' }) + ' ' + year;
+    const badge = document.getElementById('active-shift-badge');
+    if (shift === 'day') {
+        badge.className = 'shift-badge day-badge';
+        badge.innerHTML = '<i class="fas fa-sun"></i> Day Shift';
+    } else {
+        badge.className = 'shift-badge night-badge';
+        badge.innerHTML = '<i class="fas fa-moon"></i> Night Shift';
+    }
 
-            const firstDay = new Date(year, month, 1).getDay();
-            const daysInMonth = new Date(year, month + 1, 0).getDate();
-            
-            // Previous month padding
-            for (let i = 0; i < firstDay; i++) {
-                const pad = document.createElement('div');
-                pad.className = "calendar-day opacity-30 text-gray-300 flex items-center justify-center";
-                grid.appendChild(pad);
-            }
-            
-            // Actual days
-            for (let day = 1; day <= daysInMonth; day++) {
-                const dayEl = document.createElement('div');
-                dayEl.className = `calendar-day border rounded-2xl flex flex-col items-center justify-center cursor-pointer text-center`;
-                
-                if (day === selectedDate.getDate() && 
-                    month === selectedDate.getMonth() && 
-                    year === selectedDate.getFullYear()) {
-                    dayEl.classList.add('today', 'ring-2', 'ring-blue-500');
-                }
-                
-                dayEl.innerHTML = `
-                    <div class="text-lg font-semibold">${day}</div>
-                    <div class="flex gap-1 mt-2">
-                        <span class="shift-icon bg-red-100 text-red-600 rounded flex items-center justify-center text-[10px] font-bold">🔒</span>
-                        <span class="shift-icon bg-emerald-100 text-emerald-600 rounded flex items-center justify-center text-xs">☀</span>
-                    </div>
-                `;
-                
-                dayEl.onclick = () => selectDate(year, month, day);
-                grid.appendChild(dayEl);
-            }
-        }
+    buildTabs(shift);
+    renderCalendar();
+}
 
-        function selectDate(year, month, day) {
-            selectedDate = new Date(year, month, day);
-            document.getElementById('selected-date-display').textContent = 
-                selectedDate.toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' });
-            
-            // Show modal to choose shift
-            document.getElementById('modal-date').textContent = 
-                selectedDate.toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' });
-            document.getElementById('shift-modal').classList.remove('hidden');
-        }
+function changeShift() {
+    // Go back to shift picker for same date
+    const y = selDate.getFullYear(), m = selDate.getMonth(), d = selDate.getDate();
+    onDateClick(y, m, d);
+}
 
-        function closeModal() {
-            document.getElementById('shift-modal').classList.add('hidden');
-        }
+// ─── Tabs per shift ────────────────────────────────────────
+function buildTabs(shift) {
+    const tabsRow = document.getElementById('tabs-row');
 
-        function confirmShift(shiftType) {
-            currentShift = shiftType;
-            closeModal();
-            
-            // Update UI based on shift
-            updateShiftUI();
-        }
+    // Day: Resource | Maintenance | Boulder Transfer | Stock
+    // Night: Maintenance only
+    const dayTabs = [
+        { id: 'resource',    label: 'Resource' },
+        { id: 'maintenance', label: 'Maintenance' },
+        { id: 'boulder',     label: 'Boulder Transfer' },
+        { id: 'stock',       label: 'Stock' },
+    ];
+    const nightTabs = [
+        { id: 'maintenance', label: 'Maintenance' },
+    ];
 
-        function selectShift(shiftType) {
-            currentShift = shiftType;
-            updateShiftUI();
-        }
+    const tabs = shift === 'day' ? dayTabs : nightTabs;
 
-        function updateShiftUI() {
-            const dayBtn = document.getElementById('day-btn');
-            const nightBtn = document.getElementById('night-btn');
-            
-            if (currentShift === 'day') {
-                dayBtn.classList.add('active-shift', 'bg-yellow-50', 'border-yellow-400');
-                nightBtn.classList.remove('active-shift', 'bg-yellow-50', 'border-yellow-400');
-                document.getElementById('quarry-section').style.display = 'block';
-            } else {
-                nightBtn.classList.add('active-shift', 'bg-indigo-50', 'border-indigo-400');
-                dayBtn.classList.remove('active-shift', 'bg-yellow-50', 'border-yellow-400');
-                document.getElementById('quarry-section').style.display = 'none';
-            }
-        }
+    // Show/hide quarry section
+    document.getElementById('quarry-section').style.display = shift === 'day' ? 'block' : 'none';
 
-        function showInnerTab(n) {
-            document.querySelectorAll('.inner-content').forEach(el => el.classList.add('hidden'));
-            document.getElementById(`inner-content-${n}`).classList.remove('hidden');
-            
-            document.querySelectorAll('.inner-tab').forEach(tab => tab.classList.remove('active'));
-            document.getElementById(`inner-tab-${n}`).classList.add('active');
-        }
+    // Update media head color
+    const mh = document.getElementById('media-head');
+    mh.className = 'section-head ' + (shift === 'day' ? 'day-head' : 'night-head');
+    mh.querySelector('i').style.color = shift === 'day' ? 'var(--gold)' : 'var(--accent-night)';
 
-        // Row functions
-        function addCompressorRow() {
-            const tbody = document.querySelector('#comp-table tbody');
-            const row = document.createElement('tr');
-            row.innerHTML = `
-                <td class="p-3 text-center">${tbody.children.length + 1}</td>
-                <td class="p-3"><input type="text" class="w-full border rounded-lg p-2" placeholder="Vendor"></td>
-                <td class="p-3"><input type="text" class="w-full border rounded-lg p-2" value="Yes"></td>
-                <td class="p-3"><input type="text" class="w-full border rounded-lg p-2"></td>
-                <td class="p-3"><input type="text" class="w-full border rounded-lg p-2"></td>
-                <td class="p-3 text-center"><button onclick="this.closest('tr').remove()" class="text-red-500 hover:text-red-700">×</button></td>
-            `;
-            tbody.appendChild(row);
-        }
-
-        function addMaintenanceRow() {
-            const tbody = document.querySelector('#maint-table tbody');
-            const row = document.createElement('tr');
-            row.innerHTML = `
-                <td class="p-3 text-center">${tbody.children.length + 1}</td>
-                <td class="p-3"><input type="text" class="w-full border rounded-lg p-2"></td>
-                <td class="p-3"><input type="text" class="w-full border rounded-lg p-2"></td>
-                <td class="p-3"><input type="time" class="w-full border rounded-lg p-2"></td>
-                <td class="p-3"><input type="time" class="w-full border rounded-lg p-2"></td>
-                <td class="p-3"><input type="text" class="w-full border rounded-lg p-2" placeholder="HH:MM"></td>
-                <td class="p-3 text-center"><button onclick="this.closest('tr').remove()" class="text-red-500 hover:text-red-700">×</button></td>
-            `;
-            tbody.appendChild(row);
-        }
-
-        function saveDraft() {
-            alert("✅ Draft Saved Successfully for " + selectedDate.toLocaleDateString('en-IN'));
-        }
-
-        function submitReport() {
-            const msg = currentShift === 'day' ? 
-                "Day Shift Report" : "Night Shift Report";
-            alert(`✅ ${msg} Submitted Successfully!\nDate: ${selectedDate.toLocaleDateString('en-IN')}`);
-        }
-
-        // Navigation
-        function prevMonth() {
-            currentDate.setMonth(currentDate.getMonth() - 1);
-            renderCalendar();
-        }
-
-        function nextMonth() {
-            currentDate.setMonth(currentDate.getMonth() + 1);
-            renderCalendar();
-        }
-
-        // Initialize
-        window.onload = function() {
-            renderCalendar();
-            updateShiftUI();
-            showInnerTab(0);
-            
-            // Add some sample rows
-            setTimeout(() => {
-                addCompressorRow();
-                addMaintenanceRow();
-            }, 600);
+    // Render tab buttons
+    tabsRow.innerHTML = '';
+    tabs.forEach((t, i) => {
+        const btn = document.createElement('button');
+        btn.className = 'tab-btn' + (i === 0 ? ' active' : '');
+        btn.textContent = t.label;
+        btn.onclick = () => {
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+            document.getElementById('panel-' + t.id).classList.add('active');
         };
-    </script>
+        tabsRow.appendChild(btn);
+    });
+
+    // Show correct panels
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.getElementById('panel-' + tabs[0].id).classList.add('active');
+
+    // Style maintenance add button per shift
+    const mab = document.getElementById('maint-add-btn');
+    mab.className = 'btn-add ' + (shift === 'day' ? 'btn-add-day' : 'btn-add-night');
+}
+
+// ─── Table Row Adders ──────────────────────────────────────
+function addCompRow() {
+    const tbody = document.getElementById('comp-tbody');
+    const n = tbody.rows.length + 1;
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+        <td>${n}</td>
+        <td><input class="table-input" type="text" placeholder="Vendor name"></td>
+        <td>
+            <select class="table-input">
+                <option>Yes</option>
+                <option>No</option>
+                <option>Partial</option>
+            </select>
+        </td>
+        <td><input class="table-input" type="text" placeholder="CFM / Output"></td>
+        <td><input class="table-input" type="text" placeholder="Purpose"></td>
+        <td><button class="btn-del" onclick="this.closest('tr').remove()">×</button></td>
+    `;
+    tbody.appendChild(tr);
+}
+
+function addMaintRow() {
+    const tbody = document.getElementById('maint-tbody');
+    const n = tbody.rows.length + 1;
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+        <td>${n}</td>
+        <td><input class="table-input" type="text" placeholder="Asset type"></td>
+        <td><input class="table-input" type="text" placeholder="Asset name"></td>
+        <td><input class="table-input" type="time"></td>
+        <td><input class="table-input" type="time"></td>
+        <td><input class="table-input" type="text" placeholder="HH:MM"></td>
+        <td><button class="btn-del" onclick="this.closest('tr').remove()">×</button></td>
+    `;
+    tbody.appendChild(tr);
+}
+
+function addBoulderRow() {
+    const tbody = document.getElementById('boulder-tbody');
+    const n = tbody.rows.length + 1;
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+        <td>${n}</td>
+        <td><input class="table-input" type="text" placeholder="Tipper no."></td>
+        <td><input class="table-input" type="number" placeholder="0"></td>
+        <td><input class="table-input" type="number" placeholder="0.00"></td>
+        <td><input class="table-input" type="text" placeholder="Destination"></td>
+        <td><button class="btn-del" onclick="this.closest('tr').remove()">×</button></td>
+    `;
+    tbody.appendChild(tr);
+}
+
+// ─── Save / Submit ────────────────────────────────────────
+function saveDraft() {
+    const key = `${selDate.getFullYear()}-${String(selDate.getMonth()+1).padStart(2,'0')}-${String(selDate.getDate()).padStart(2,'0')}`;
+    if (!savedShifts[key]) savedShifts[key] = {};
+    savedShifts[key][curShift] = true;
+    renderCalendar();
+    showToast('Draft saved ✓', '#10b981');
+}
+
+function submitReport() {
+    const key = `${selDate.getFullYear()}-${String(selDate.getMonth()+1).padStart(2,'0')}-${String(selDate.getDate()).padStart(2,'0')}`;
+    if (!savedShifts[key]) savedShifts[key] = {};
+    savedShifts[key][curShift] = true;
+    renderCalendar();
+    showToast(`${curShift === 'day' ? 'Day' : 'Night'} Shift Submitted ✓`, '#6366f1');
+}
+
+function showToast(msg, color) {
+    const t = document.createElement('div');
+    t.style.cssText = `position:fixed;bottom:32px;right:32px;background:${color};color:#fff;
+        padding:14px 24px;border-radius:12px;font-family:'Barlow Condensed',sans-serif;
+        font-size:16px;font-weight:600;z-index:9999;box-shadow:0 6px 24px rgba(0,0,0,0.15);
+        animation:fadeInUp 0.3s ease`;
+    t.textContent = msg;
+    document.body.appendChild(t);
+    setTimeout(() => t.remove(), 2800);
+}
+
+// ─── Init ─────────────────────────────────────────────────
+const style = document.createElement('style');
+style.textContent = `@keyframes fadeInUp { from{transform:translateY(16px);opacity:0} to{transform:translateY(0);opacity:1} }`;
+document.head.appendChild(style);
+
+renderCalendar();
+</script>
 </body>
 </html>
