@@ -13,7 +13,7 @@
             --navy-light: #253d5b;
             --steel: #2e5272;
             --accent-day: #f59e0b;
-            --accent-day-light: #fef3c7;
+            --accent-day-light: #fffbeb;
             --accent-night: #6366f1;
             --accent-night-light: #eef2ff;
             --gold: #d97706;
@@ -37,14 +37,12 @@
             color: var(--text-main);
         }
 
-        /* ─── Layout ─── */
         .shell {
-            max-width: 1400px;
+            max-width: 1600px;
             margin: 0 auto;
-            padding: 24px;
+            padding: 16px;
             display: flex;
             flex-direction: column;
-            gap: 0;
         }
 
         .card {
@@ -57,7 +55,7 @@
         /* ─── Header ─── */
         .header {
             background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 40%, var(--steel) 100%);
-            padding: 28px 36px;
+            padding: 20px 28px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -74,636 +72,373 @@
             pointer-events: none;
         }
 
-        .header-brand {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-        }
+        .header-brand { display: flex; align-items: center; gap: 14px; }
 
         .header-icon {
-            width: 56px; height: 56px;
+            width: 48px; height: 48px;
             background: rgba(245,158,11,0.2);
             border: 2px solid rgba(245,158,11,0.4);
-            border-radius: 16px;
+            border-radius: 14px;
             display: flex; align-items: center; justify-content: center;
-            font-size: 24px; color: var(--accent-day);
+            font-size: 20px; color: var(--accent-day);
         }
 
         .header-title {
             font-family: 'Rajdhani', sans-serif;
-            font-size: 28px;
-            font-weight: 700;
-            color: #fff;
-            letter-spacing: 0.5px;
+            font-size: 24px; font-weight: 700; color: #fff; letter-spacing: 0.5px;
         }
 
-        .header-sub {
-            font-size: 13px;
-            color: rgba(255,255,255,0.55);
-            margin-top: 2px;
-            font-weight: 400;
-        }
+        .header-sub { font-size: 12px; color: rgba(255,255,255,0.55); margin-top: 2px; }
 
-        .header-date-display {
-            text-align: right;
-        }
+        .header-date-display { text-align: right; }
+        .header-month { font-size: 11px; color: rgba(255,255,255,0.5); font-weight: 500; letter-spacing: 1px; text-transform: uppercase; }
+        .header-selected { font-family: 'Barlow Condensed', sans-serif; font-size: 20px; font-weight: 600; color: #fff; margin-top: 2px; }
 
-        .header-month {
-            font-size: 12px;
-            color: rgba(255,255,255,0.5);
-            font-weight: 500;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-
-        .header-selected {
-            font-family: 'Barlow Condensed', sans-serif;
-            font-size: 22px;
-            font-weight: 600;
-            color: #fff;
-            margin-top: 2px;
-        }
-
-        /* ─── Body ─── */
+        /* ─── Body Layout ─── */
         .body {
             display: flex;
-            height: calc(100vh - 160px);
+            height: calc(100vh - 110px);
             min-height: 600px;
         }
 
-        /* ─── Calendar Sidebar ─── */
+        /* ─── Sidebar ─── */
         .sidebar {
-            width: 300px;
+            width: 260px;
             flex-shrink: 0;
             background: var(--surface);
             border-right: 1px solid var(--border);
             display: flex;
             flex-direction: column;
-            overflow: hidden;
         }
 
         .cal-nav {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 18px 20px 14px;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 14px 16px 12px;
             border-bottom: 1px solid var(--border);
         }
 
         .cal-nav-btn {
-            width: 34px; height: 34px;
-            border: 1px solid var(--border);
-            background: #fff;
-            border-radius: 10px;
-            cursor: pointer;
-            font-size: 13px;
-            color: var(--text-muted);
-            transition: all 0.2s;
+            width: 30px; height: 30px;
+            border: 1px solid var(--border); background: #fff;
+            border-radius: 8px; cursor: pointer; font-size: 11px;
+            color: var(--text-muted); transition: all 0.2s;
             display: flex; align-items: center; justify-content: center;
         }
 
-        .cal-nav-btn:hover {
-            background: var(--navy);
-            color: #fff;
-            border-color: var(--navy);
-        }
+        .cal-nav-btn:hover { background: var(--navy); color: #fff; border-color: var(--navy); }
 
-        .cal-month-label {
-            font-family: 'Rajdhani', sans-serif;
-            font-size: 17px;
-            font-weight: 700;
-            color: var(--navy);
-        }
+        .cal-month-label { font-family: 'Rajdhani', sans-serif; font-size: 15px; font-weight: 700; color: var(--navy); }
 
         .cal-weekdays {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            padding: 8px 12px 4px;
-            gap: 2px;
+            display: grid; grid-template-columns: repeat(7, 1fr);
+            padding: 6px 10px 3px; gap: 2px;
         }
 
-        .cal-wd {
-            text-align: center;
-            font-size: 11px;
-            font-weight: 600;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
+        .cal-wd { text-align: center; font-size: 10px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
 
         .cal-grid {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            padding: 4px 12px 12px;
-            gap: 3px;
-            overflow-y: auto;
+            display: grid; grid-template-columns: repeat(7, 1fr);
+            padding: 3px 10px 10px; gap: 2px; overflow-y: auto;
         }
 
         .cal-day {
-            aspect-ratio: 1;
-            border-radius: 10px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            position: relative;
-            transition: all 0.15s;
-            padding: 2px;
+            aspect-ratio: 1; border-radius: 8px;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            cursor: pointer; position: relative;
+            transition: all 0.15s; padding: 2px;
             border: 1.5px solid transparent;
         }
 
-        .cal-day:hover {
-            background: #f1f5f9;
-        }
+        .cal-day:hover { background: #f1f5f9; }
+        .cal-day.selected { background: var(--navy); border-color: var(--navy); }
+        .cal-day.selected .day-num { color: #fff; }
+        .cal-day.today-ring { border-color: var(--accent-day); }
+        .cal-day.pad { opacity: 0; pointer-events: none; }
 
-        .cal-day.selected {
-            background: var(--navy);
-            border-color: var(--navy);
-        }
+        .day-num { font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 600; color: var(--text-main); line-height: 1; }
 
-        .cal-day.selected .day-num {
-            color: #fff;
-        }
-
-        .cal-day.today-ring {
-            border-color: var(--accent-day);
-        }
-
-        .cal-day.pad {
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        .day-num {
-            font-family: 'Barlow Condensed', sans-serif;
-            font-size: 15px;
-            font-weight: 600;
-            color: var(--text-main);
-            line-height: 1;
-        }
-
-        .day-dots {
-            display: flex;
-            gap: 2px;
-            margin-top: 3px;
-        }
-
-        .dot {
-            width: 5px; height: 5px;
-            border-radius: 50%;
-        }
-
+        .day-dots { display: flex; gap: 2px; margin-top: 2px; }
+        .dot { width: 4px; height: 4px; border-radius: 50%; }
         .dot-day { background: var(--accent-day); }
         .dot-night { background: var(--accent-night); }
-        .dot-none { background: transparent; }
 
-        /* ─── Main Content ─── */
-        .main {
-            flex: 1;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-        }
+        /* ─── Main ─── */
+        .main { flex: 1; overflow: hidden; display: flex; flex-direction: column; }
 
-        /* ─── Landing Screen (date selected, no shift yet) ─── */
+        /* Landing */
         #screen-landing {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            gap: 24px;
-            padding: 40px;
+            flex: 1; display: flex; align-items: center; justify-content: center;
+            flex-direction: column; gap: 20px; padding: 40px;
         }
 
-        .landing-prompt {
-            font-family: 'Rajdhani', sans-serif;
-            font-size: 26px;
-            font-weight: 700;
-            color: var(--navy);
-            text-align: center;
-        }
+        .landing-prompt { font-family: 'Rajdhani', sans-serif; font-size: 24px; font-weight: 700; color: var(--navy); text-align: center; }
+        .landing-date-badge { background: linear-gradient(135deg, var(--navy), var(--steel)); color: #fff; padding: 10px 28px; border-radius: 50px; font-family: 'Barlow Condensed', sans-serif; font-size: 18px; font-weight: 600; }
+        .landing-prompt-sub { color: var(--text-muted); font-size: 14px; text-align: center; }
 
-        .landing-date-badge {
-            background: linear-gradient(135deg, var(--navy), var(--steel));
-            color: #fff;
-            padding: 12px 32px;
-            border-radius: 50px;
-            font-family: 'Barlow Condensed', sans-serif;
-            font-size: 20px;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-        }
-
-        .landing-prompt-sub {
-            color: var(--text-muted);
-            font-size: 15px;
-            text-align: center;
-        }
-
-        .shift-cards {
-            display: flex;
-            gap: 24px;
-            margin-top: 8px;
-        }
+        .shift-cards { display: flex; gap: 20px; margin-top: 6px; }
 
         .shift-card {
-            flex: 1;
-            max-width: 200px;
-            border: 2px solid var(--border);
-            border-radius: 20px;
-            padding: 32px 24px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.2s;
-            background: #fff;
+            flex: 1; max-width: 180px;
+            border: 2px solid var(--border); border-radius: 18px;
+            padding: 28px 20px; text-align: center; cursor: pointer;
+            transition: all 0.2s; background: #fff;
         }
 
-        .shift-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 32px rgba(0,0,0,0.1);
-        }
-
-        .shift-card.day-card:hover, .shift-card.day-card.active {
-            border-color: var(--accent-day);
-            background: var(--accent-day-light);
-        }
-
-        .shift-card.night-card:hover, .shift-card.night-card.active {
-            border-color: var(--accent-night);
-            background: var(--accent-night-light);
-        }
-
-        .shift-card-icon {
-            font-size: 40px;
-            margin-bottom: 12px;
-        }
-
-        .shift-card-title {
-            font-family: 'Rajdhani', sans-serif;
-            font-size: 20px;
-            font-weight: 700;
-            color: var(--navy);
-        }
-
-        .shift-card-time {
-            font-size: 12px;
-            color: var(--text-muted);
-            margin-top: 4px;
-        }
+        .shift-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.1); }
+        .shift-card.day-card:hover { border-color: var(--accent-day); background: var(--accent-day-light); }
+        .shift-card.night-card:hover { border-color: var(--accent-night); background: var(--accent-night-light); }
+        .shift-card-icon { font-size: 36px; margin-bottom: 10px; }
+        .shift-card-title { font-family: 'Rajdhani', sans-serif; font-size: 18px; font-weight: 700; color: var(--navy); }
+        .shift-card-time { font-size: 11px; color: var(--text-muted); margin-top: 3px; }
 
         /* ─── Report Screen ─── */
-        #screen-report {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-        }
+        #screen-report { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
 
         /* Shift Bar */
         .shift-bar {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 14px 28px;
-            background: #fff;
-            border-bottom: 1px solid var(--border);
-            flex-shrink: 0;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 10px 20px; background: #fff;
+            border-bottom: 1px solid var(--border); flex-shrink: 0;
         }
 
-        .shift-bar-left {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-        }
+        .shift-bar-left { display: flex; align-items: center; gap: 12px; }
 
         .shift-badge {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 8px 18px;
-            border-radius: 50px;
-            font-family: 'Barlow Condensed', sans-serif;
-            font-size: 15px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
+            display: flex; align-items: center; gap: 7px;
+            padding: 6px 16px; border-radius: 50px;
+            font-family: 'Barlow Condensed', sans-serif; font-size: 14px; font-weight: 600;
+            cursor: pointer; transition: all 0.2s;
         }
 
-        .shift-badge.day-badge {
-            background: var(--accent-day-light);
-            color: var(--gold);
-            border: 1.5px solid var(--accent-day);
-        }
+        .shift-badge.day-badge { background: var(--accent-day-light); color: var(--gold); border: 1.5px solid var(--accent-day); }
+        .shift-badge.night-badge { background: var(--accent-night-light); color: var(--accent-night); border: 1.5px solid var(--accent-night); }
+        .shift-bar-date { font-family: 'Barlow Condensed', sans-serif; font-size: 15px; font-weight: 600; color: var(--navy); }
 
-        .shift-badge.night-badge {
-            background: var(--accent-night-light);
-            color: var(--accent-night);
-            border: 1.5px solid var(--accent-night);
-        }
-
-        .shift-bar-date {
-            font-family: 'Barlow Condensed', sans-serif;
-            font-size: 16px;
-            font-weight: 600;
-            color: var(--navy);
-        }
-
-        .shift-bar-right {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+        .shift-bar-right { display: flex; align-items: center; gap: 8px; }
 
         .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 9px 20px;
-            border-radius: 10px;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            border: none;
-            transition: all 0.18s;
+            display: inline-flex; align-items: center; gap: 5px;
+            padding: 7px 16px; border-radius: 9px; font-size: 13px; font-weight: 600;
+            cursor: pointer; border: none; transition: all 0.18s;
         }
 
-        .btn-outline {
-            background: transparent;
-            border: 1.5px solid var(--border);
-            color: var(--text-muted);
-        }
-
+        .btn-outline { background: transparent; border: 1.5px solid var(--border); color: var(--text-muted); }
         .btn-outline:hover { background: var(--surface); }
-
-        .btn-success {
-            background: var(--emerald);
-            color: #fff;
-        }
-
+        .btn-success { background: var(--emerald); color: #fff; }
         .btn-success:hover { background: #059669; }
+        .btn-change { background: transparent; border: 1.5px solid var(--border); color: var(--text-muted); font-size: 12px; padding: 5px 12px; border-radius: 7px; cursor: pointer; }
 
-        .btn-change {
-            background: transparent;
-            border: 1.5px solid var(--border);
-            color: var(--text-muted);
-            font-size: 13px;
-            padding: 6px 14px;
-            border-radius: 8px;
-        }
-
-        /* Report Content Scroll */
-        .report-scroll {
-            flex: 1;
-            overflow-y: auto;
-            padding: 28px 32px;
+        /* ─── HORIZONTAL SECTION TABS ─── */
+        .h-tabs-nav {
             display: flex;
-            flex-direction: column;
-            gap: 28px;
-        }
-
-        /* Section Block */
-        .section-block {
             background: #fff;
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            overflow: hidden;
+            border-bottom: 2px solid var(--border);
+            flex-shrink: 0;
+            overflow-x: auto;
         }
 
-        .section-head {
-            padding: 16px 24px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            border-bottom: 1px solid var(--border);
+        .h-tab-btn {
+            display: flex; align-items: center; gap: 7px;
+            padding: 0 24px; height: 46px;
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 14px; font-weight: 600;
+            color: var(--text-muted); cursor: pointer;
+            border: none; background: none;
+            border-bottom: 3px solid transparent;
+            margin-bottom: -2px;
+            white-space: nowrap;
+            transition: all 0.18s; letter-spacing: 0.3px;
         }
 
-        .section-head.day-head {
-            background: linear-gradient(90deg, #fffbeb, #fff);
+        .h-tab-btn:hover:not(.active) { color: var(--text-main); background: #f8fafc; }
+
+        .h-tab-btn.active { color: var(--navy); border-bottom-color: var(--accent-day); }
+        .h-tab-btn.active-night { color: var(--navy); border-bottom-color: var(--accent-night); }
+
+        .h-tab-btn .tab-icon { font-size: 15px; }
+        .h-tab-btn .tab-num {
+            display: inline-flex; align-items: center; justify-content: center;
+            width: 18px; height: 18px; border-radius: 50%;
+            font-size: 10px; font-weight: 700;
+            background: var(--border); color: var(--text-muted);
         }
 
-        .section-head.night-head {
-            background: linear-gradient(90deg, #eef2ff, #fff);
+        .h-tab-btn.active .tab-num { background: var(--accent-day); color: #fff; }
+        .h-tab-btn.active-night .tab-num { background: var(--accent-night); color: #fff; }
+
+        /* Section panels */
+        .h-tab-panels { flex: 1; overflow-y: auto; }
+        .h-panel { display: none; padding: 20px 24px; }
+        .h-panel.active { display: block; }
+
+        /* ─── Section Inner Styling ─── */
+        .sec-label {
+            font-size: 11px; font-weight: 700; color: var(--text-muted);
+            text-transform: uppercase; letter-spacing: 0.6px;
+            margin-bottom: 12px; margin-top: 16px;
+            display: flex; align-items: center; gap: 8px;
         }
 
-        .section-head i {
-            font-size: 16px;
+        .sec-label:first-child { margin-top: 0; }
+
+        .sec-label::after {
+            content: ''; flex: 1; height: 1px; background: var(--border);
         }
 
-        .section-title {
-            font-family: 'Rajdhani', sans-serif;
-            font-size: 17px;
-            font-weight: 700;
-            letter-spacing: 0.3px;
-        }
-
-        .day-head .section-title { color: var(--gold); }
-        .night-head .section-title { color: var(--accent-night); }
-
-        .section-body {
-            padding: 20px 24px;
-        }
-
-        /* Grid fields */
-        .field-grid {
-            display: grid;
-            gap: 14px;
-        }
-
+        .field-grid { display: grid; gap: 12px; }
+        .field-grid-5 { grid-template-columns: repeat(5, 1fr); }
         .field-grid-4 { grid-template-columns: repeat(4, 1fr); }
         .field-grid-3 { grid-template-columns: repeat(3, 1fr); }
         .field-grid-2 { grid-template-columns: repeat(2, 1fr); }
+        .field-grid-6 { grid-template-columns: repeat(6, 1fr); }
 
-        .field-item {
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-        }
+        .field-item { display: flex; flex-direction: column; gap: 4px; }
 
-        .field-label {
-            font-size: 12px;
-            font-weight: 600;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
+        .field-label { font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.4px; }
 
         .field-input {
-            width: 100%;
-            padding: 10px 14px;
-            border: 1.5px solid var(--border);
-            border-radius: 10px;
-            font-family: 'Barlow', sans-serif;
-            font-size: 14px;
-            color: var(--text-main);
+            width: 100%; padding: 9px 12px;
+            border: 1.5px solid var(--border); border-radius: 9px;
+            font-family: 'Barlow', sans-serif; font-size: 13px;
+            color: var(--text-main); background: var(--surface);
+            transition: border-color 0.2s; outline: none;
+        }
+
+        .field-input:focus { border-color: var(--steel); background: #fff; }
+
+        textarea.field-input { resize: vertical; min-height: 80px; }
+
+        /* ─── Feet breakdown sub-grid ─── */
+        .feet-breakdown {
             background: var(--surface);
-            transition: border-color 0.2s;
-            outline: none;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 14px 16px;
+            margin-top: 4px;
         }
 
-        .field-input:focus {
-            border-color: var(--steel);
-            background: #fff;
+        .feet-row {
+            display: grid;
+            grid-template-columns: 120px 1fr 40px 1fr;
+            align-items: center;
+            gap: 8px;
+            padding: 5px 0;
+            border-bottom: 1px solid #f1f5f9;
         }
 
-        textarea.field-input {
-            resize: vertical;
-            min-height: 90px;
+        .feet-row:last-child { border-bottom: none; }
+
+        .feet-row-label { font-size: 12px; font-weight: 600; color: var(--text-muted); }
+        .feet-row-sep { font-size: 13px; color: var(--text-muted); text-align: center; font-weight: 600; }
+
+        .feet-row-total {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 14px; font-weight: 700; color: var(--navy);
+            background: #fff; border: 1.5px solid var(--border);
+            border-radius: 8px; padding: 7px 10px; text-align: center;
         }
 
-        /* Inner Tabs */
-        .tabs-row {
-            display: flex;
-            border-bottom: 1px solid var(--border);
-            padding: 0 24px;
-            background: var(--surface);
+        .feet-grand {
+            margin-top: 8px; padding: 10px 14px;
+            background: linear-gradient(90deg, var(--navy), var(--steel));
+            border-radius: 10px; color: #fff;
+            display: flex; justify-content: space-between; align-items: center;
         }
 
-        .tab-btn {
-            padding: 13px 20px;
-            font-size: 13px;
-            font-weight: 600;
-            color: var(--text-muted);
-            cursor: pointer;
-            border: none;
-            background: none;
-            border-bottom: 3px solid transparent;
-            transition: all 0.18s;
-            letter-spacing: 0.2px;
-        }
+        .feet-grand-label { font-size: 12px; font-weight: 600; opacity: 0.8; }
+        .feet-grand-val { font-family: 'Barlow Condensed', sans-serif; font-size: 20px; font-weight: 700; }
 
-        .tab-btn.active {
-            color: var(--navy);
-            border-bottom-color: var(--navy);
-        }
-
-        .tab-btn:hover:not(.active) {
-            color: var(--text-main);
-        }
-
-        .tab-panel { display: none; }
-        .tab-panel.active { display: block; }
-
-        /* Tables */
-        .data-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 13px;
-        }
+        /* Boulder Output Table */
+        .data-table { width: 100%; border-collapse: collapse; font-size: 13px; }
 
         .data-table th {
-            padding: 11px 14px;
-            text-align: left;
-            font-size: 11px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: var(--text-muted);
-            background: var(--surface);
-            border-bottom: 1px solid var(--border);
+            padding: 10px 12px; text-align: left;
+            font-size: 11px; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 0.5px; color: var(--text-muted);
+            background: var(--surface); border-bottom: 1px solid var(--border);
         }
 
         .data-table td {
-            padding: 8px 10px;
-            border-bottom: 1px solid #f1f5f9;
-            vertical-align: middle;
+            padding: 7px 8px; border-bottom: 1px solid #f1f5f9; vertical-align: middle;
         }
 
         .data-table tbody tr:last-child td { border-bottom: none; }
         .data-table tbody tr:hover td { background: #f8fafc; }
 
         .table-input {
-            width: 100%;
-            padding: 7px 10px;
-            border: 1.5px solid var(--border);
-            border-radius: 8px;
-            font-size: 13px;
-            font-family: 'Barlow', sans-serif;
-            background: #fff;
-            outline: none;
+            width: 100%; padding: 6px 9px;
+            border: 1.5px solid var(--border); border-radius: 7px;
+            font-size: 13px; font-family: 'Barlow', sans-serif;
+            background: #fff; outline: none;
         }
 
         .table-input:focus { border-color: var(--steel); }
 
+        select.table-input { cursor: pointer; }
+
         .btn-add {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            margin-top: 12px;
-            padding: 8px 18px;
-            border-radius: 8px;
-            font-size: 13px;
-            font-weight: 600;
-            cursor: pointer;
-            border: none;
-            transition: all 0.18s;
+            display: inline-flex; align-items: center; gap: 5px;
+            margin-top: 10px; padding: 7px 16px; border-radius: 8px;
+            font-size: 12px; font-weight: 600; cursor: pointer; border: none; transition: all 0.18s;
         }
 
-        .btn-add-day {
-            background: var(--accent-day-light);
-            color: var(--gold);
-            border: 1.5px solid var(--accent-day);
-        }
+        .btn-add-day { background: var(--accent-day-light); color: var(--gold); border: 1.5px solid var(--accent-day); }
+        .btn-add-night { background: var(--accent-night-light); color: var(--accent-night); border: 1.5px solid var(--accent-night); }
 
-        .btn-add-night {
-            background: var(--accent-night-light);
-            color: var(--accent-night);
-            border: 1.5px solid var(--accent-night);
-        }
-
-        .btn-del {
-            background: none;
-            border: none;
-            color: #cbd5e1;
-            cursor: pointer;
-            font-size: 16px;
-            padding: 2px 6px;
-            border-radius: 6px;
-            transition: all 0.15s;
-        }
-
+        .btn-del { background: none; border: none; color: #cbd5e1; cursor: pointer; font-size: 15px; padding: 2px 6px; border-radius: 5px; transition: all 0.15s; }
         .btn-del:hover { color: var(--red); background: #fff1f2; }
+
+        /* KPI Cards Row */
+        .kpi-row { display: flex; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; }
+
+        .kpi-card {
+            flex: 1; min-width: 100px;
+            background: var(--surface); border: 1.5px solid var(--border);
+            border-radius: 12px; padding: 12px 14px;
+        }
+
+        .kpi-card-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-muted); margin-bottom: 4px; }
+        .kpi-card-val { font-family: 'Barlow Condensed', sans-serif; font-size: 22px; font-weight: 700; color: var(--navy); }
+        .kpi-card-unit { font-size: 11px; color: var(--text-muted); font-weight: 500; }
 
         /* File upload */
         .file-zone {
-            border: 2px dashed var(--border);
-            border-radius: 12px;
-            padding: 20px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.2s;
+            border: 2px dashed var(--border); border-radius: 10px;
+            padding: 16px; text-align: center; cursor: pointer; transition: all 0.2s;
         }
 
-        .file-zone:hover {
-            border-color: var(--steel);
-            background: #f8fafc;
+        .file-zone:hover { border-color: var(--steel); background: #f8fafc; }
+        .file-zone input[type=file] { display: none; }
+        .file-zone-label { font-size: 12px; color: var(--text-muted); }
+        .file-zone-label span { color: var(--steel); font-weight: 600; }
+
+        /* Tag badge */
+        .tag {
+            display: inline-block; padding: 3px 10px; border-radius: 20px;
+            font-size: 11px; font-weight: 600;
         }
 
-        .file-zone input[type=file] {
-            display: none;
+        .tag-day { background: var(--accent-day-light); color: var(--gold); }
+        .tag-night { background: var(--accent-night-light); color: var(--accent-night); }
+
+        /* Divider */
+        .divider { height: 1px; background: var(--border); margin: 16px 0; }
+
+        @media (max-width: 1100px) {
+            .field-grid-5 { grid-template-columns: repeat(3, 1fr); }
+            .field-grid-6 { grid-template-columns: repeat(3, 1fr); }
         }
 
-        .file-zone-label {
-            font-size: 13px;
-            color: var(--text-muted);
-        }
-
-        .file-zone-label span {
-            color: var(--steel);
-            font-weight: 600;
-        }
-
-        /* ─── Responsive ─── */
         @media (max-width: 900px) {
-            .sidebar { width: 220px; }
+            .sidebar { width: 200px; }
             .field-grid-4 { grid-template-columns: repeat(2, 1fr); }
             .field-grid-3 { grid-template-columns: repeat(2, 1fr); }
         }
 
         @media (max-width: 650px) {
             .body { flex-direction: column; height: auto; }
-            .sidebar { width: 100%; height: 260px; }
+            .sidebar { width: 100%; height: 240px; }
             .shift-cards { flex-direction: column; }
         }
     </style>
@@ -746,22 +481,23 @@
 
         <!-- Main Panel -->
         <div class="main">
-            <!-- Screen A: Pick shift (shown after date is clicked) -->
+
+            <!-- Screen A: Pick shift -->
             <div id="screen-landing">
                 <div class="landing-prompt">Select a date to get started</div>
                 <div class="landing-prompt-sub">Click any day on the calendar to begin entering shift data.</div>
-                <!-- shifts will appear dynamically below -->
             </div>
 
-            <!-- Screen B: Report form -->
+            <!-- Screen B: Report -->
             <div id="screen-report" style="display:none">
 
+                <!-- Shift bar -->
                 <div class="shift-bar">
                     <div class="shift-bar-left">
                         <div id="active-shift-badge" class="shift-badge day-badge">
                             <i class="fas fa-sun"></i> Day Shift
                         </div>
-                        <div class="shift-bar-date" id="shift-bar-date">12 May 2026</div>
+                        <div class="shift-bar-date" id="shift-bar-date">13 May 2026</div>
                     </div>
                     <div class="shift-bar-right">
                         <button class="btn-change" onclick="changeShift()"><i class="fas fa-exchange-alt"></i> Change Shift</button>
@@ -770,196 +506,306 @@
                     </div>
                 </div>
 
-                <div class="report-scroll" id="report-scroll">
-                    <!-- Day-only: Quarry section -->
-                    <div class="section-block" id="quarry-section">
-                        <div class="section-head day-head">
-                            <i class="fas fa-bomb" style="color:var(--gold)"></i>
-                            <span class="section-title">QUARRY / INPUT DETAILS</span>
+                <!-- Horizontal Section Tabs -->
+                <div class="h-tabs-nav" id="h-tabs-nav">
+                    <!-- injected by JS -->
+                </div>
+
+                <!-- Panels container -->
+                <div class="h-tab-panels" id="h-tab-panels">
+
+                    <!-- ═══ QUARRY PANEL ═══ -->
+                    <div class="h-panel" id="panel-quarry">
+
+                        <div class="sec-label">Equipment Count</div>
+                        <div class="field-grid field-grid-5" style="margin-bottom:16px">
+                            <div class="field-item">
+                                <label class="field-label">No. of Compressors</label>
+                                <input type="number" class="field-input" id="q-comp" placeholder="0" oninput="updateCompCount()">
+                            </div>
+                            <div class="field-item">
+                                <label class="field-label">No. of Tippers</label>
+                                <input type="number" class="field-input" id="q-tippers" placeholder="0">
+                            </div>
+                            <div class="field-item">
+                                <label class="field-label">No. of Excavators</label>
+                                <input type="number" class="field-input" id="q-excavators" placeholder="0">
+                            </div>
+                            <div class="field-item">
+                                <label class="field-label">No. of NMR</label>
+                                <input type="number" class="field-input" id="q-nmr" placeholder="0">
+                            </div>
+                            <div class="field-item">
+                                <label class="field-label">No. of Breakers</label>
+                                <input type="number" class="field-input" id="q-breakers" placeholder="0">
+                            </div>
                         </div>
-                        <div class="section-body">
-                            <div class="field-grid field-grid-4">
-                                <div class="field-item">
-                                    <label class="field-label">No. of Compressors</label>
-                                    <input type="number" class="field-input" id="q-comp" placeholder="0">
-                                </div>
-                                <div class="field-item">
-                                    <label class="field-label">No. of Holes</label>
-                                    <input type="number" class="field-input" id="q-holes" placeholder="0">
-                                </div>
-                                <div class="field-item">
-                                    <label class="field-label">Depth (ft)</label>
-                                    <input type="number" class="field-input" id="q-depth" placeholder="0">
-                                </div>
-                                <div class="field-item">
-                                    <label class="field-label">Total Feet</label>
-                                    <input type="number" class="field-input" id="q-total" placeholder="0">
-                                </div>
+
+                        <div class="divider"></div>
+                        <div class="sec-label">Drilling Details — Depth-wise Hole Count</div>
+
+                        <div class="feet-breakdown" id="feet-breakdown">
+                            <div class="feet-row" style="grid-template-columns:120px 1fr 40px 1fr; border-bottom:1px solid var(--border); padding-bottom:8px; margin-bottom:4px;">
+                                <span style="font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase">Depth</span>
+                                <span style="font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase">No. of Holes</span>
+                                <span></span>
+                                <span style="font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase">Total Feet</span>
+                            </div>
+                            <!-- rows injected by JS -->
+                        </div>
+
+                        <div class="feet-grand" id="feet-grand" style="margin-top:10px">
+                            <span class="feet-grand-label">GRAND TOTAL FEET</span>
+                            <span class="feet-grand-val" id="grand-total-ft">0</span>
+                        </div>
+
+                        <div class="divider"></div>
+                        <div class="sec-label">Boulder Output</div>
+
+                        <table class="data-table" id="boulder-out-table">
+                            <thead>
+                                <tr>
+                                    <th>Sr. No.</th>
+                                    <th>Product Size</th>
+                                    <th>Qty (MT)</th>
+                                    <th>Recovery (%)</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="boulder-out-tbody"></tbody>
+                        </table>
+                        <div style="display:flex;align-items:center;gap:10px;margin-top:10px">
+                            <button class="btn-add btn-add-day" onclick="addBoulderOutputRow()"><i class="fas fa-plus"></i> Add Product</button>
+                            <span id="boulder-totals" style="font-family:'Barlow Condensed',sans-serif;font-size:13px;color:var(--text-muted)"></span>
+                        </div>
+                    </div>
+
+                    <!-- ═══ RESOURCE PANEL ═══ -->
+                    <div class="h-panel" id="panel-resource">
+                        <div class="sec-label">Compressor Details</div>
+                        <table class="data-table" id="comp-table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Vendor</th>
+                                    <th>Working?</th>
+                                    <th>Output (CFM)</th>
+                                    <th>Purpose</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="comp-tbody"></tbody>
+                        </table>
+                        <button class="btn-add btn-add-day" onclick="addCompRow()"><i class="fas fa-plus"></i> Add Compressor</button>
+
+                        <div class="sec-label" style="margin-top:20px">Tipper-wise Transfer</div>
+                        <table class="data-table" id="tipper-table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Tipper No.</th>
+                                    <th>Trips</th>
+                                    <th>Load (MT)</th>
+                                    <th>Destination</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="tipper-tbody"></tbody>
+                        </table>
+                        <button class="btn-add btn-add-day" onclick="addTipperRow()"><i class="fas fa-plus"></i> Add Tipper</button>
+                    </div>
+
+                    <!-- ═══ MAINTENANCE PANEL ═══ -->
+                    <div class="h-panel" id="panel-maintenance">
+                        <div class="sec-label">Maintenance Entries</div>
+                        <table class="data-table" id="maint-table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Asset Type</th>
+                                    <th>Asset Name</th>
+                                    <th>From</th>
+                                    <th>To</th>
+                                    <th>Total Hrs</th>
+                                    <th>Remarks</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="maint-tbody"></tbody>
+                        </table>
+                        <button class="btn-add btn-add-day" id="maint-add-btn" onclick="addMaintRow()"><i class="fas fa-plus"></i> Add Entry</button>
+                    </div>
+
+                    <!-- ═══ MACHINERY WORK PANEL ═══ -->
+                    <div class="h-panel" id="panel-machinery">
+                        <div class="sec-label">Machinery Work Log</div>
+                        <table class="data-table" id="mach-table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Machine Type</th>
+                                    <th>Machine No.</th>
+                                    <th>Activity</th>
+                                    <th>Start Time</th>
+                                    <th>End Time</th>
+                                    <th>Hours Worked</th>
+                                    <th>Operator</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="mach-tbody"></tbody>
+                        </table>
+                        <button class="btn-add btn-add-day" id="mach-add-btn" onclick="addMachRow()"><i class="fas fa-plus"></i> Add Entry</button>
+
+                        <div class="sec-label" style="margin-top:20px">Machine Summary</div>
+                        <div class="kpi-row" id="mach-kpi-row">
+                            <div class="kpi-card">
+                                <div class="kpi-card-label">Total Machines</div>
+                                <div class="kpi-card-val" id="kpi-mach-count">0</div>
+                                <div class="kpi-card-unit">active</div>
+                            </div>
+                            <div class="kpi-card">
+                                <div class="kpi-card-label">Total Hours</div>
+                                <div class="kpi-card-val" id="kpi-mach-hrs">0</div>
+                                <div class="kpi-card-unit">hours</div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Tabs Section: Resource / Maintenance / Boulder / Stock -->
-                    <div class="section-block">
-                        <div class="tabs-row" id="tabs-row">
-                            <!-- tabs injected by JS -->
-                        </div>
-
-                        <!-- Resource (Day only) -->
-                        <div class="tab-panel" id="panel-resource">
-                            <div style="padding:20px 24px">
-                                <p style="font-size:13px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:14px">Compressor Details</p>
-                                <table class="data-table" id="comp-table">
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>Vendor</th>
-                                            <th>Working?</th>
-                                            <th>Output</th>
-                                            <th>Purpose</th>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="comp-tbody"></tbody>
-                                </table>
-                                <button class="btn-add btn-add-day" onclick="addCompRow()"><i class="fas fa-plus"></i> Add Compressor</button>
+                    <!-- ═══ STOCK PANEL ═══ -->
+                    <div class="h-panel" id="panel-stock">
+                        <div class="sec-label">Stock Position</div>
+                        <div class="field-grid field-grid-4" style="margin-bottom:16px">
+                            <div class="field-item">
+                                <label class="field-label">Opening Stock (MT)</label>
+                                <input type="number" class="field-input" id="s-open" placeholder="0" oninput="calcStock()">
+                            </div>
+                            <div class="field-item">
+                                <label class="field-label">Production (MT)</label>
+                                <input type="number" class="field-input" id="s-prod" placeholder="0" oninput="calcStock()">
+                            </div>
+                            <div class="field-item">
+                                <label class="field-label">Dispatched (MT)</label>
+                                <input type="number" class="field-input" id="s-disp" placeholder="0" oninput="calcStock()">
+                            </div>
+                            <div class="field-item">
+                                <label class="field-label">Closing Stock (MT)</label>
+                                <input type="number" class="field-input" id="s-close" placeholder="auto" readonly style="background:#f1f5f9;color:var(--navy);font-weight:700">
                             </div>
                         </div>
 
-                        <!-- Maintenance (Day + Night) -->
-                        <div class="tab-panel" id="panel-maintenance">
-                            <div style="padding:20px 24px">
-                                <p style="font-size:13px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:14px">Maintenance Details</p>
-                                <table class="data-table" id="maint-table">
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>Asset Type</th>
-                                            <th>Asset Name</th>
-                                            <th>From</th>
-                                            <th>To</th>
-                                            <th>Total Hrs</th>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="maint-tbody"></tbody>
-                                </table>
-                                <button class="btn-add" id="maint-add-btn" onclick="addMaintRow()"><i class="fas fa-plus"></i> Add Entry</button>
+                        <div class="field-grid field-grid-3">
+                            <div class="field-item">
+                                <label class="field-label">Grade</label>
+                                <input type="text" class="field-input" id="s-grade" placeholder="e.g. MM40">
                             </div>
-                        </div>
-
-                        <!-- Boulder Transfer -->
-                        <div class="tab-panel" id="panel-boulder">
-                            <div style="padding:20px 24px">
-                                <p style="font-size:13px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:14px">Tipper-wise Transfer</p>
-                                <table class="data-table" id="boulder-table">
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>Tipper No.</th>
-                                            <th>Trips</th>
-                                            <th>Load (MT)</th>
-                                            <th>Destination</th>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="boulder-tbody"></tbody>
-                                </table>
-                                <button class="btn-add btn-add-day" id="boulder-add-btn" onclick="addBoulderRow()"><i class="fas fa-plus"></i> Add Transfer</button>
-                            </div>
-                        </div>
-
-                        <!-- Stock -->
-                        <div class="tab-panel" id="panel-stock">
-                            <div style="padding:20px 24px">
-                                <p style="font-size:13px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:14px">Stock Position</p>
-                                <div class="field-grid field-grid-3" style="margin-bottom:16px">
-                                    <div class="field-item">
-                                        <label class="field-label">Opening Stock (MT)</label>
-                                        <input type="number" class="field-input" id="s-open" placeholder="0">
-                                    </div>
-                                    <div class="field-item">
-                                        <label class="field-label">Production (MT)</label>
-                                        <input type="number" class="field-input" id="s-prod" placeholder="0">
-                                    </div>
-                                    <div class="field-item">
-                                        <label class="field-label">Dispatched (MT)</label>
-                                        <input type="number" class="field-input" id="s-disp" placeholder="0">
-                                    </div>
-                                </div>
-                                <div class="field-grid field-grid-2">
-                                    <div class="field-item">
-                                        <label class="field-label">Closing Stock (MT)</label>
-                                        <input type="number" class="field-input" id="s-close" placeholder="0">
-                                    </div>
-                                    <div class="field-item">
-                                        <label class="field-label">Grade</label>
-                                        <input type="text" class="field-input" id="s-grade" placeholder="e.g. MM40">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Photos + Remarks -->
-                    <div class="section-block">
-                        <div class="section-head day-head" id="media-head">
-                            <i class="fas fa-camera" style="color:var(--gold)"></i>
-                            <span class="section-title">ATTACHMENTS & REMARKS</span>
-                        </div>
-                        <div class="section-body">
-                            <div class="field-grid field-grid-3" style="margin-bottom:20px">
-                                <div class="field-item">
-                                    <label class="field-label">Before Operation Photo</label>
-                                    <label class="file-zone">
-                                        <input type="file" accept="image/*">
-                                        <div style="font-size:24px;color:#cbd5e1;margin-bottom:6px"><i class="fas fa-image"></i></div>
-                                        <div class="file-zone-label"><span>Click to upload</span> or drag & drop</div>
-                                    </label>
-                                </div>
-                                <div class="field-item">
-                                    <label class="field-label">After Operation Photo</label>
-                                    <label class="file-zone">
-                                        <input type="file" accept="image/*">
-                                        <div style="font-size:24px;color:#cbd5e1;margin-bottom:6px"><i class="fas fa-image"></i></div>
-                                        <div class="file-zone-label"><span>Click to upload</span> or drag & drop</div>
-                                    </label>
-                                </div>
-                                <div class="field-item">
-                                    <label class="field-label">Planning Document</label>
-                                    <label class="file-zone">
-                                        <input type="file">
-                                        <div style="font-size:24px;color:#cbd5e1;margin-bottom:6px"><i class="fas fa-file-alt"></i></div>
-                                        <div class="file-zone-label"><span>Click to upload</span> or drag & drop</div>
-                                    </label>
-                                </div>
+                            <div class="field-item">
+                                <label class="field-label">Royalty (₹/MT)</label>
+                                <input type="number" class="field-input" id="s-royalty" placeholder="0">
                             </div>
                             <div class="field-item">
                                 <label class="field-label">Remarks</label>
-                                <textarea class="field-input" id="remarks" placeholder="Any observations, issues, or remarks for this shift..."></textarea>
+                                <input type="text" class="field-input" id="s-remarks" placeholder="Any stock note...">
                             </div>
                         </div>
+
+                        <div class="sec-label" style="margin-top:20px">Stock Summary</div>
+                        <div class="kpi-row">
+                            <div class="kpi-card">
+                                <div class="kpi-card-label">Opening</div>
+                                <div class="kpi-card-val" id="kpi-open">—</div>
+                                <div class="kpi-card-unit">MT</div>
+                            </div>
+                            <div class="kpi-card">
+                                <div class="kpi-card-label">+ Production</div>
+                                <div class="kpi-card-val" id="kpi-prod" style="color:var(--emerald)">—</div>
+                                <div class="kpi-card-unit">MT</div>
+                            </div>
+                            <div class="kpi-card">
+                                <div class="kpi-card-label">− Dispatched</div>
+                                <div class="kpi-card-val" id="kpi-disp" style="color:var(--red)">—</div>
+                                <div class="kpi-card-unit">MT</div>
+                            </div>
+                            <div class="kpi-card" style="background:linear-gradient(135deg,var(--navy),var(--steel));border-color:var(--navy)">
+                                <div class="kpi-card-label" style="color:rgba(255,255,255,0.7)">=  Closing</div>
+                                <div class="kpi-card-val" id="kpi-close" style="color:#fff">—</div>
+                                <div class="kpi-card-unit" style="color:rgba(255,255,255,0.6)">MT</div>
+                            </div>
+                        </div>
+
+                        <div class="sec-label" style="margin-top:20px">Attachments & Remarks</div>
+                        <div class="field-grid field-grid-3" style="margin-bottom:14px">
+                            <div class="field-item">
+                                <label class="field-label">Before Operation Photo</label>
+                                <label class="file-zone">
+                                    <input type="file" accept="image/*">
+                                    <div style="font-size:22px;color:#cbd5e1;margin-bottom:5px"><i class="fas fa-image"></i></div>
+                                    <div class="file-zone-label"><span>Click to upload</span></div>
+                                </label>
+                            </div>
+                            <div class="field-item">
+                                <label class="field-label">After Operation Photo</label>
+                                <label class="file-zone">
+                                    <input type="file" accept="image/*">
+                                    <div style="font-size:22px;color:#cbd5e1;margin-bottom:5px"><i class="fas fa-image"></i></div>
+                                    <div class="file-zone-label"><span>Click to upload</span></div>
+                                </label>
+                            </div>
+                            <div class="field-item">
+                                <label class="field-label">Planning Document</label>
+                                <label class="file-zone">
+                                    <input type="file">
+                                    <div style="font-size:22px;color:#cbd5e1;margin-bottom:5px"><i class="fas fa-file-alt"></i></div>
+                                    <div class="file-zone-label"><span>Click to upload</span></div>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="field-item">
+                            <label class="field-label">General Remarks</label>
+                            <textarea class="field-input" id="gen-remarks" placeholder="Any observations, issues, or notes for this shift..."></textarea>
+                        </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-</div>
+
+                </div><!-- /h-tab-panels -->
+
+            </div><!-- /screen-report -->
+        </div><!-- /main -->
+    </div><!-- /body -->
+</div><!-- /card -->
+</div><!-- /shell -->
 
 <script>
-// ─── State ───────────────────────────────────────────────
-let curViewDate = new Date(2026, 4, 13);  // calendar view month
-let selDate = null;    // selected date object
-let curShift = null;   // 'day' | 'night'
-const savedShifts = {};  // key: "YYYY-MM-DD", val: {day: bool, night: bool}
+// ─── Constants ────────────────────────────────────────────
+const DEPTH_OPTIONS = [3, 4, 5, 5.5, 6];
+
+const PRODUCT_SIZES = [
+    'WMM — 0–40 mm',
+    'WMM — 0–53 mm',
+    'GSB — 0–50 mm',
+    'Ballast — 25–50 mm',
+    'Metal — 10–20 mm',
+    'Metal — 20–40 mm',
+    'Chips — 6–10 mm',
+    'Dust — 0–6 mm',
+    'Boulder — 150–300 mm',
+    'Boulder — 300–600 mm',
+    'Oversized — 600mm+',
+    'Other',
+];
+
+const MACHINE_TYPES = ['Excavator', 'Tipper', 'Loader', 'Dozer', 'Crusher', 'Breaker', 'Compressor', 'Drill', 'Generator', 'Other'];
+
+// ─── State ────────────────────────────────────────────────
+let curViewDate = new Date(2026, 4, 13);
+let selDate = null;
+let curShift = null;
+const savedShifts = {};
 
 // ─── Calendar ─────────────────────────────────────────────
 function renderCalendar() {
     const grid = document.getElementById('cal-grid');
     grid.innerHTML = '';
-    const y = curViewDate.getFullYear();
-    const m = curViewDate.getMonth();
+    const y = curViewDate.getFullYear(), m = curViewDate.getMonth();
     const label = curViewDate.toLocaleString('en-IN', { month: 'long', year: 'numeric' });
     document.getElementById('cal-month').textContent = label;
     document.getElementById('hdr-month').textContent = label;
@@ -975,20 +821,14 @@ function renderCalendar() {
     }
 
     for (let d = 1; d <= daysInMonth; d++) {
-        const key = `${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+        const key = dateKey(y, m, d);
         const el = document.createElement('div');
         el.className = 'cal-day';
-
-        const isToday = d === today.getDate() && m === today.getMonth() && y === today.getFullYear();
-        if (isToday) el.classList.add('today-ring');
-
-        const isSel = selDate && d === selDate.getDate() && m === selDate.getMonth() && y === selDate.getFullYear();
-        if (isSel) el.classList.add('selected');
-
+        if (d === today.getDate() && m === today.getMonth() && y === today.getFullYear()) el.classList.add('today-ring');
+        if (selDate && d === selDate.getDate() && m === selDate.getMonth() && y === selDate.getFullYear()) el.classList.add('selected');
         const shifts = savedShifts[key] || {};
-        const dotDay   = shifts.day   ? '<div class="dot dot-day"></div>'   : '';
+        const dotDay = shifts.day ? '<div class="dot dot-day"></div>' : '';
         const dotNight = shifts.night ? '<div class="dot dot-night"></div>' : '';
-
         el.innerHTML = `<span class="day-num">${d}</span><div class="day-dots">${dotDay}${dotNight}</div>`;
         el.onclick = () => onDateClick(y, m, d);
         grid.appendChild(el);
@@ -998,14 +838,17 @@ function renderCalendar() {
 function prevMonth() { curViewDate.setMonth(curViewDate.getMonth() - 1); renderCalendar(); }
 function nextMonth() { curViewDate.setMonth(curViewDate.getMonth() + 1); renderCalendar(); }
 
-// ─── Date Click → show shift picker ─────────────────────
+function dateKey(y, m, d) {
+    return `${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+}
+
+// ─── Date Click ───────────────────────────────────────────
 function onDateClick(y, m, d) {
     selDate = new Date(y, m, d);
     const label = selDate.toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' });
     document.getElementById('hdr-date').textContent = label;
     renderCalendar();
 
-    // Show shift picker in landing screen
     document.getElementById('screen-report').style.display = 'none';
     const landing = document.getElementById('screen-landing');
     landing.style.display = 'flex';
@@ -1028,7 +871,7 @@ function onDateClick(y, m, d) {
     `;
 }
 
-// ─── Open Shift Report ────────────────────────────────────
+// ─── Open Shift ───────────────────────────────────────────
 function openShift(shift) {
     curShift = shift;
     document.getElementById('screen-landing').style.display = 'none';
@@ -1046,79 +889,153 @@ function openShift(shift) {
         badge.innerHTML = '<i class="fas fa-moon"></i> Night Shift';
     }
 
-    buildTabs(shift);
+    buildHorizontalTabs(shift);
+    buildFeetBreakdown();
     renderCalendar();
 }
 
 function changeShift() {
-    // Go back to shift picker for same date
     const y = selDate.getFullYear(), m = selDate.getMonth(), d = selDate.getDate();
     onDateClick(y, m, d);
 }
 
-// ─── Tabs per shift ────────────────────────────────────────
-function buildTabs(shift) {
-    const tabsRow = document.getElementById('tabs-row');
+// ─── Horizontal Tabs ──────────────────────────────────────
+function buildHorizontalTabs(shift) {
+    const nav = document.getElementById('h-tabs-nav');
+    nav.innerHTML = '';
 
-    // Day: Resource | Maintenance | Boulder Transfer | Stock
-    // Night: Maintenance only
     const dayTabs = [
-        { id: 'resource',    label: 'Resource' },
-        { id: 'maintenance', label: 'Maintenance' },
-        { id: 'boulder',     label: 'Boulder Transfer' },
-        { id: 'stock',       label: 'Stock' },
+        { id: 'quarry',      label: 'Quarry',         icon: 'fas fa-bomb' },
+        { id: 'resource',    label: 'Resource',        icon: 'fas fa-truck' },
+        { id: 'maintenance', label: 'Maintenance',     icon: 'fas fa-tools' },
+        { id: 'machinery',   label: 'Machinery Work',  icon: 'fas fa-cog' },
+        { id: 'stock',       label: 'Stock',           icon: 'fas fa-layer-group' },
     ];
     const nightTabs = [
-        { id: 'maintenance', label: 'Maintenance' },
+        { id: 'maintenance', label: 'Maintenance',    icon: 'fas fa-tools' },
+        { id: 'machinery',   label: 'Machinery Work', icon: 'fas fa-cog' },
+        { id: 'stock',       label: 'Stock',          icon: 'fas fa-layer-group' },
     ];
 
     const tabs = shift === 'day' ? dayTabs : nightTabs;
 
-    // Show/hide quarry section
-    document.getElementById('quarry-section').style.display = shift === 'day' ? 'block' : 'none';
+    // Style maintenance and machinery add btns per shift
+    const mab = document.getElementById('maint-add-btn');
+    const machab = document.getElementById('mach-add-btn');
+    if (shift === 'night') {
+        mab.className = 'btn-add btn-add-night';
+        machab.className = 'btn-add btn-add-night';
+    } else {
+        mab.className = 'btn-add btn-add-day';
+        machab.className = 'btn-add btn-add-day';
+    }
 
-    // Update media head color
-    const mh = document.getElementById('media-head');
-    mh.className = 'section-head ' + (shift === 'day' ? 'day-head' : 'night-head');
-    mh.querySelector('i').style.color = shift === 'day' ? 'var(--gold)' : 'var(--accent-night)';
+    // Hide all panels
+    document.querySelectorAll('.h-panel').forEach(p => p.classList.remove('active'));
 
-    // Render tab buttons
-    tabsRow.innerHTML = '';
     tabs.forEach((t, i) => {
         const btn = document.createElement('button');
-        btn.className = 'tab-btn' + (i === 0 ? ' active' : '');
-        btn.textContent = t.label;
+        btn.className = 'h-tab-btn' + (i === 0 ? (shift === 'day' ? ' active' : ' active-night') : '');
+        btn.innerHTML = `<i class="${t.icon} tab-icon"></i>${t.label}`;
         btn.onclick = () => {
-            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.h-tab-btn').forEach(b => b.classList.remove('active', 'active-night'));
+            btn.classList.add(shift === 'day' ? 'active' : 'active-night');
+            document.querySelectorAll('.h-panel').forEach(p => p.classList.remove('active'));
             document.getElementById('panel-' + t.id).classList.add('active');
         };
-        tabsRow.appendChild(btn);
+        nav.appendChild(btn);
     });
 
-    // Show correct panels
-    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    // Show first panel
     document.getElementById('panel-' + tabs[0].id).classList.add('active');
-
-    // Style maintenance add button per shift
-    const mab = document.getElementById('maint-add-btn');
-    mab.className = 'btn-add ' + (shift === 'day' ? 'btn-add-day' : 'btn-add-night');
 }
 
-// ─── Table Row Adders ──────────────────────────────────────
+// ─── Feet Breakdown ───────────────────────────────────────
+function buildFeetBreakdown() {
+    const container = document.getElementById('feet-breakdown');
+    // Remove existing data rows (keep header row at index 0)
+    const header = container.querySelector('.feet-row');
+    container.innerHTML = '';
+    container.appendChild(header);
+
+    DEPTH_OPTIONS.forEach(depth => {
+        const row = document.createElement('div');
+        row.className = 'feet-row';
+        row.style.gridTemplateColumns = '120px 1fr 40px 1fr';
+        row.dataset.depth = depth;
+        row.innerHTML = `
+            <span class="feet-row-label">${depth} ft / hole</span>
+            <input type="number" class="table-input" placeholder="0" min="0"
+                oninput="calcFeetRow(this, ${depth})" style="max-width:120px">
+            <span class="feet-row-sep">×${depth}</span>
+            <div class="feet-row-total" id="ft-total-${String(depth).replace('.','_')}">0</div>
+        `;
+        container.appendChild(row);
+    });
+}
+
+function calcFeetRow(input, depth) {
+    const holes = parseFloat(input.value) || 0;
+    const total = holes * depth;
+    const id = 'ft-total-' + String(depth).replace('.','_');
+    document.getElementById(id).textContent = total % 1 === 0 ? total : total.toFixed(1);
+    calcGrandTotal();
+}
+
+function calcGrandTotal() {
+    let grand = 0;
+    DEPTH_OPTIONS.forEach(depth => {
+        const id = 'ft-total-' + String(depth).replace('.','_');
+        const el = document.getElementById(id);
+        if (el) grand += parseFloat(el.textContent) || 0;
+    });
+    document.getElementById('grand-total-ft').textContent = grand % 1 === 0 ? grand : grand.toFixed(1);
+}
+
+// ─── Boulder Output Table ─────────────────────────────────
+function addBoulderOutputRow() {
+    const tbody = document.getElementById('boulder-out-tbody');
+    const n = tbody.rows.length + 1;
+    const options = PRODUCT_SIZES.map((s, i) => `<option value="${s}">${s}</option>`).join('');
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+        <td style="text-align:center;font-weight:700;color:var(--text-muted)">${n}</td>
+        <td>
+            <select class="table-input">
+                <option value="">— Select Product Size —</option>
+                ${options}
+            </select>
+        </td>
+        <td><input class="table-input" type="number" placeholder="0.00" min="0" step="0.01" oninput="calcBoulderTotals()"></td>
+        <td><input class="table-input" type="number" placeholder="0" min="0" max="100" step="0.1" oninput="calcBoulderTotals()"></td>
+        <td><button class="btn-del" onclick="this.closest('tr').remove();calcBoulderTotals()">×</button></td>
+    `;
+    tbody.appendChild(tr);
+}
+
+function calcBoulderTotals() {
+    const rows = document.querySelectorAll('#boulder-out-tbody tr');
+    let totalQty = 0;
+    rows.forEach(r => {
+        const qty = parseFloat(r.cells[2].querySelector('input').value) || 0;
+        totalQty += qty;
+    });
+    const el = document.getElementById('boulder-totals');
+    if (rows.length > 0) el.textContent = `Total Qty: ${totalQty.toFixed(2)} MT  |  ${rows.length} product(s)`;
+    else el.textContent = '';
+}
+
+// ─── Compressor Table ──────────────────────────────────────
 function addCompRow() {
     const tbody = document.getElementById('comp-tbody');
     const n = tbody.rows.length + 1;
     const tr = document.createElement('tr');
     tr.innerHTML = `
-        <td>${n}</td>
+        <td style="text-align:center;color:var(--text-muted);font-weight:600">${n}</td>
         <td><input class="table-input" type="text" placeholder="Vendor name"></td>
         <td>
             <select class="table-input">
-                <option>Yes</option>
-                <option>No</option>
-                <option>Partial</option>
+                <option>Yes</option><option>No</option><option>Partial</option>
             </select>
         </td>
         <td><input class="table-input" type="text" placeholder="CFM / Output"></td>
@@ -1128,40 +1045,131 @@ function addCompRow() {
     tbody.appendChild(tr);
 }
 
-function addMaintRow() {
-    const tbody = document.getElementById('maint-tbody');
+// ─── Tipper Table ─────────────────────────────────────────
+function addTipperRow() {
+    const tbody = document.getElementById('tipper-tbody');
     const n = tbody.rows.length + 1;
     const tr = document.createElement('tr');
     tr.innerHTML = `
-        <td>${n}</td>
-        <td><input class="table-input" type="text" placeholder="Asset type"></td>
-        <td><input class="table-input" type="text" placeholder="Asset name"></td>
-        <td><input class="table-input" type="time"></td>
-        <td><input class="table-input" type="time"></td>
-        <td><input class="table-input" type="text" placeholder="HH:MM"></td>
-        <td><button class="btn-del" onclick="this.closest('tr').remove()">×</button></td>
-    `;
-    tbody.appendChild(tr);
-}
-
-function addBoulderRow() {
-    const tbody = document.getElementById('boulder-tbody');
-    const n = tbody.rows.length + 1;
-    const tr = document.createElement('tr');
-    tr.innerHTML = `
-        <td>${n}</td>
-        <td><input class="table-input" type="text" placeholder="Tipper no."></td>
-        <td><input class="table-input" type="number" placeholder="0"></td>
-        <td><input class="table-input" type="number" placeholder="0.00"></td>
+        <td style="text-align:center;color:var(--text-muted);font-weight:600">${n}</td>
+        <td><input class="table-input" type="text" placeholder="e.g. AP07 TU1234"></td>
+        <td><input class="table-input" type="number" placeholder="0" min="0"></td>
+        <td><input class="table-input" type="number" placeholder="0.00" step="0.01"></td>
         <td><input class="table-input" type="text" placeholder="Destination"></td>
         <td><button class="btn-del" onclick="this.closest('tr').remove()">×</button></td>
     `;
     tbody.appendChild(tr);
 }
 
+// ─── Maintenance Table ────────────────────────────────────
+function addMaintRow() {
+    const tbody = document.getElementById('maint-tbody');
+    const n = tbody.rows.length + 1;
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+        <td style="text-align:center;color:var(--text-muted);font-weight:600">${n}</td>
+        <td><input class="table-input" type="text" placeholder="e.g. Excavator"></td>
+        <td><input class="table-input" type="text" placeholder="Asset name / ID"></td>
+        <td><input class="table-input" type="time"></td>
+        <td><input class="table-input" type="time"></td>
+        <td><input class="table-input" type="text" placeholder="HH:MM" readonly style="background:#f8fafc;color:var(--navy);font-weight:600"></td>
+        <td><input class="table-input" type="text" placeholder="Remarks"></td>
+        <td><button class="btn-del" onclick="this.closest('tr').remove()">×</button></td>
+    `;
+    // Auto-calc hours
+    const fromInput = tr.cells[3].querySelector('input');
+    const toInput   = tr.cells[4].querySelector('input');
+    const totalCell = tr.cells[5].querySelector('input');
+    const calcHours = () => {
+        if (fromInput.value && toInput.value) {
+            const [fh,fm] = fromInput.value.split(':').map(Number);
+            let [th,tm] = toInput.value.split(':').map(Number);
+            let mins = (th * 60 + tm) - (fh * 60 + fm);
+            if (mins < 0) mins += 1440;
+            const h = Math.floor(mins/60), m2 = mins % 60;
+            totalCell.value = `${String(h).padStart(2,'0')}:${String(m2).padStart(2,'0')}`;
+        }
+    };
+    fromInput.addEventListener('change', calcHours);
+    toInput.addEventListener('change', calcHours);
+    tbody.appendChild(tr);
+}
+
+// ─── Machinery Work Table ─────────────────────────────────
+function addMachRow() {
+    const tbody = document.getElementById('mach-tbody');
+    const n = tbody.rows.length + 1;
+    const typeOptions = MACHINE_TYPES.map(t => `<option>${t}</option>`).join('');
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+        <td style="text-align:center;color:var(--text-muted);font-weight:600">${n}</td>
+        <td>
+            <select class="table-input">
+                <option value="">—</option>
+                ${typeOptions}
+            </select>
+        </td>
+        <td><input class="table-input" type="text" placeholder="No. / ID"></td>
+        <td><input class="table-input" type="text" placeholder="Activity"></td>
+        <td><input class="table-input" type="time"></td>
+        <td><input class="table-input" type="time"></td>
+        <td><input class="table-input" type="text" placeholder="HH:MM" readonly style="background:#f8fafc;color:var(--navy);font-weight:600"></td>
+        <td><input class="table-input" type="text" placeholder="Operator name"></td>
+        <td><button class="btn-del" onclick="this.closest('tr').remove();updateMachKPI()">×</button></td>
+    `;
+    const fromInput = tr.cells[4].querySelector('input');
+    const toInput   = tr.cells[5].querySelector('input');
+    const totalCell = tr.cells[6].querySelector('input');
+    const calcH = () => {
+        if (fromInput.value && toInput.value) {
+            const [fh,fm] = fromInput.value.split(':').map(Number);
+            let [th,tm] = toInput.value.split(':').map(Number);
+            let mins = (th*60+tm)-(fh*60+fm);
+            if (mins < 0) mins += 1440;
+            const h = Math.floor(mins/60), m2 = mins % 60;
+            totalCell.value = `${String(h).padStart(2,'0')}:${String(m2).padStart(2,'0')}`;
+            updateMachKPI();
+        }
+    };
+    fromInput.addEventListener('change', calcH);
+    toInput.addEventListener('change', calcH);
+    tbody.appendChild(tr);
+    updateMachKPI();
+}
+
+function updateMachKPI() {
+    const rows = document.querySelectorAll('#mach-tbody tr');
+    let totalMins = 0;
+    rows.forEach(r => {
+        const val = r.cells[6].querySelector('input').value;
+        if (val && val.includes(':')) {
+            const [h,m] = val.split(':').map(Number);
+            totalMins += h*60 + m;
+        }
+    });
+    const h = Math.floor(totalMins/60), m = totalMins % 60;
+    document.getElementById('kpi-mach-count').textContent = rows.length;
+    document.getElementById('kpi-mach-hrs').textContent = totalMins > 0 ? `${h}h ${m}m` : '0';
+}
+
+// ─── Stock Calc ───────────────────────────────────────────
+function calcStock() {
+    const o = parseFloat(document.getElementById('s-open').value) || 0;
+    const p = parseFloat(document.getElementById('s-prod').value) || 0;
+    const d = parseFloat(document.getElementById('s-disp').value) || 0;
+    const c = o + p - d;
+    document.getElementById('s-close').value = c.toFixed(2);
+    document.getElementById('kpi-open').textContent = o.toFixed(2);
+    document.getElementById('kpi-prod').textContent = '+' + p.toFixed(2);
+    document.getElementById('kpi-disp').textContent = '-' + d.toFixed(2);
+    document.getElementById('kpi-close').textContent = c.toFixed(2);
+}
+
+function updateCompCount() {}
+
 // ─── Save / Submit ────────────────────────────────────────
 function saveDraft() {
-    const key = `${selDate.getFullYear()}-${String(selDate.getMonth()+1).padStart(2,'0')}-${String(selDate.getDate()).padStart(2,'0')}`;
+    const key = dateKey(selDate.getFullYear(), selDate.getMonth(), selDate.getDate());
     if (!savedShifts[key]) savedShifts[key] = {};
     savedShifts[key][curShift] = true;
     renderCalendar();
@@ -1169,7 +1177,7 @@ function saveDraft() {
 }
 
 function submitReport() {
-    const key = `${selDate.getFullYear()}-${String(selDate.getMonth()+1).padStart(2,'0')}-${String(selDate.getDate()).padStart(2,'0')}`;
+    const key = dateKey(selDate.getFullYear(), selDate.getMonth(), selDate.getDate());
     if (!savedShifts[key]) savedShifts[key] = {};
     savedShifts[key][curShift] = true;
     renderCalendar();
@@ -1178,16 +1186,15 @@ function submitReport() {
 
 function showToast(msg, color) {
     const t = document.createElement('div');
-    t.style.cssText = `position:fixed;bottom:32px;right:32px;background:${color};color:#fff;
-        padding:14px 24px;border-radius:12px;font-family:'Barlow Condensed',sans-serif;
-        font-size:16px;font-weight:600;z-index:9999;box-shadow:0 6px 24px rgba(0,0,0,0.15);
+    t.style.cssText = `position:fixed;bottom:28px;right:28px;background:${color};color:#fff;
+        padding:12px 22px;border-radius:12px;font-family:'Barlow Condensed',sans-serif;
+        font-size:15px;font-weight:600;z-index:9999;box-shadow:0 6px 24px rgba(0,0,0,0.15);
         animation:fadeInUp 0.3s ease`;
     t.textContent = msg;
     document.body.appendChild(t);
     setTimeout(() => t.remove(), 2800);
 }
 
-// ─── Init ─────────────────────────────────────────────────
 const style = document.createElement('style');
 style.textContent = `@keyframes fadeInUp { from{transform:translateY(16px);opacity:0} to{transform:translateY(0);opacity:1} }`;
 document.head.appendChild(style);
